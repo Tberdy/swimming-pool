@@ -1,0 +1,38 @@
+@import "../../../material/project";
+
+.AppHeader {
+    height: 64px;
+    background-color: #9E9E9E;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.AppHeader-container{
+    height: 100%;
+}
+
+.AppHeader-logo {
+    width: 171px;
+    height: 41px;
+    padding-top: 13px;
+}
+
+.AppHeader-link{
+    text-decoration: none;
+    color: $black !important;
+    padding: 0 20px;
+    display: inline-block;
+    transition: 250ms background-color;
+    line-height: 64px;
+}
+
+.AppHeader-link:hover{
+    background-color: $background;
+}
+
+.AppHeader-spacer{
+    padding-top: 64px;
+}

@@ -1,26 +1,36 @@
 language: php
- 
-php:
-    - 7.1
 
-before_script:
-    - cp .env.travis .env
-    - mysql -e 'create database homestead_test;'
-    - composer self-update
-    - composer install
-    - php artisan key:generate
- 
-script:
-    - vendor/bin/phpunit
+php:
+  - 7.1
+
+sudo: false
 
 services:
   - mysql
 
+before_install:
+  - nvm install 5.1
+
+before_script:
+  - cp .env.example .env
+  - mysql -e 'create database laravel;'
+  - export DB_DATABASE=laravel
+  - export DB_USERNAME=travis
+  - export DB_PASSWORD=
+  - php artisan key:generate
+  - php artisan jwt:generate
+
+install:
+  - composer install && npm install -g gulp bower && npm install && bower install
+
+script:
+  - php artisan migrate --force && gulp && vendor/bin/phpunit
+  
 cache:
   directories:
+    - bower_components
     - node_modules
     - vendor 
  
 notifications:
     email: false
-
