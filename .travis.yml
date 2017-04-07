@@ -18,7 +18,7 @@ before_script:
   - export DB_USERNAME=travis
   - export DB_PASSWORD=
   - php artisan key:generate
-  - php artisan jwt:generate
+  - php artisan jwt:secret
 
 install:
   - composer install && npm install -g gulp bower && npm install && bower install
