@@ -36,12 +36,14 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
+            'firstname'  => 'required|min:3',
             'name'       => 'required|min:3',
             'email'      => 'required|email|unique:users',
             'password'   => 'required|min:8',
         ]);
 
         $user = new User;
+        $user->firstname = trim($request->firstname);
         $user->name = trim($request->name);
         $user->email = trim(strtolower($request->email));
         $user->password = bcrypt($request->password);
