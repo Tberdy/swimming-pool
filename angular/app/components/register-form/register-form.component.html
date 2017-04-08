@@ -1,44 +1,24 @@
 <form ng-submit="vm.register()">
-    <div>
-        <md-input-container class="RegisterForm-inputContainer">
-            <label>Prénom</label>
-            <input type="text" ng-model="vm.firstname">
-        </md-input-container>
-    </div>
+	<div>
+		<md-input-container class="RegisterForm-inputContainer">
+			<label>Name</label>
+			<input type="text" ng-model="vm.name">
+		</md-input-container>
+	</div>
 
-    <div>
-        <md-input-container class="RegisterForm-inputContainer">
-            <label>Nom</label>
-            <input type="text" ng-model="vm.name">
-        </md-input-container>
-    </div>
+	<div>
+		<md-input-container class="RegisterForm-inputContainer">
+			<label>Email</label>
+			<input type="email" ng-model="vm.email">
+		</md-input-container>
+	</div>
 
-    <div>
-        <md-input-container class="RegisterForm-inputContainer">
-            <label>Email</label>
-            <input type="email" ng-model="vm.email">
-        </md-input-container>
-    </div>
+	<div>
+		<md-input-container class="RegisterForm-inputContainer">
+			<label>Password</label>
+			<input type="password" ng-model="vm.password">
+		</md-input-container>
+	</div>
 
-    <div>
-        <md-input-container class="RegisterForm-inputContainer">
-            <label>Password</label>
-            <input type="password" ng-model="vm.password">
-        </md-input-container>
-    </div>
-
-    <div>
-        <md-radio-group ng-model="vm.gender">
-            <md-radio-button value="male" class="md-primary">Homme</md-radio-button>
-            <md-radio-button value="female" class="md-primary">Femme</md-radio-button>
-        </md-radio-group>
-    </div>
-    
-    <div>
-        
-        {{ vm.name }}
-        
-    </div>
-
-    <md-button type="submit" class="RegisterForm-submit md-primary md-raised">Register</md-button>
+	<md-button type="submit" class="RegisterForm-submit md-primary md-raised">Register</md-button>
 </form>

@@ -1,8 +1,8 @@
 @import "../../../material/project";
 
-.AppHeader {
+.DemoHeader {
     height: 64px;
-    background-color: #9E9E9E;
+    background-color: white;
     position: absolute;
     top: 0;
     left: 0;
@@ -10,17 +10,17 @@
     z-index: 10;
 }
 
-.AppHeader-container{
+.DemoHeader-container{
     height: 100%;
 }
 
-.AppHeader-logo {
+.DemoHeader-logo {
     width: 171px;
     height: 41px;
     padding-top: 13px;
 }
 
-.AppHeader-link{
+.DemoHeader-link{
     text-decoration: none;
     color: $black !important;
     padding: 0 20px;
@@ -29,10 +29,15 @@
     line-height: 64px;
 }
 
-.AppHeader-link:hover{
+.DemoHeader-link:hover{
     background-color: $background;
 }
 
-.AppHeader-spacer{
+.DemoHeader-github{
+    margin-top: 17px;
+    margin-left: 10px;
+}
+
+.DemoHeader-spacer{
     padding-top: 64px;
 }
