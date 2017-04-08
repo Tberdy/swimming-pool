@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'gender' => '1',
-        'birthdate' => $faker->dateTime,
+        'birthdate' => $faker->dateTime->format('Y-m-d'),
         'remember_token' => str_random(10),
     ];
 });
