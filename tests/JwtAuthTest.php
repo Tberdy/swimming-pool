@@ -49,6 +49,7 @@ class JwtAuthTest extends TestCase
         $user = factory(App\User::class)->make();
 
         $this->post('/api/auth/register', [
+            'firstname'=> $user->firstname,
             'name'     => $user->name,
             'email'    => $user->email,
             'password' => 'test15125',
