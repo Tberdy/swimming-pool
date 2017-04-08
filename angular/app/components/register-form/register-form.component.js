@@ -11,6 +11,8 @@ class RegisterFormController {
         this.name = '';
         this.email = '';
         this.password = '';
+        this.gender = '';
+        this.birthdate = new Date();
     }
 
     register() {
@@ -18,7 +20,9 @@ class RegisterFormController {
             firstname: this.firstname,
             name: this.name,
             email: this.email,
-            password: this.password
+            password: this.password,
+            gender: this.gender,
+            birthdate: this.birthdate
         };
 
         this.$auth.signup(user)

@@ -40,6 +40,8 @@ class AuthController extends Controller
             'name'       => 'required|min:3',
             'email'      => 'required|email|unique:users',
             'password'   => 'required|min:8',
+            'gender'     => 'required',
+            'birthdate'  => 'required'
         ]);
 
         $user = new User;
@@ -47,6 +49,8 @@ class AuthController extends Controller
         $user->name = trim($request->name);
         $user->email = trim(strtolower($request->email));
         $user->password = bcrypt($request->password);
+        $user->gender = intval($request->gender);
+        $user->birthdate = date( "Y-m-d", strtotime($request->birthdate));
         $user->save();
 
         $token = JWTAuth::fromUser($user);

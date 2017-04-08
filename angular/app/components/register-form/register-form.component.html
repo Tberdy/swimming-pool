@@ -27,5 +27,18 @@
         </md-input-container>
     </div>
 
+    <div>
+        <md-input-container class="RegisterForm-inputContainer">
+            <md-radio-group ng-model="vm.gender">
+                <md-radio-button value="1" class="md-primary">Homme</md-radio-button>
+                <md-radio-button value="2" class="md-primary">Femme</md-radio-button>
+            </md-radio-group>
+        </md-input-container>
+    </div>
+
+    <div>
+        <md-datepicker ng-model="vm.birthdate" md-placeholder="Date de naissance"></md-datepicker>
+    </div>
+
     <md-button type="submit" class="RegisterForm-submit md-primary md-raised">Register</md-button>
 </form>

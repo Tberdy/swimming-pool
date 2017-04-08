@@ -53,6 +53,8 @@ class JwtAuthTest extends TestCase
             'name'     => $user->name,
             'email'    => $user->email,
             'password' => 'test15125',
+            'gender'   => $user->gender,
+            'birthdate'=> $user->birthdate
         ])
         ->seeApiSuccess()
         ->seeJson(['email' => $user->email])
