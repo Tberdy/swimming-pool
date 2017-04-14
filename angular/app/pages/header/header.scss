@@ -1,6 +1,6 @@
 @import "../../../material/project";
 
-.DemoHeader {
+.AppHeader {
     height: 64px;
     background-color: white;
     position: absolute;
@@ -10,17 +10,17 @@
     z-index: 10;
 }
 
-.DemoHeader-container{
+.AppHeader-container{
     height: 100%;
 }
 
-.DemoHeader-logo {
+.AppHeader-logo {
     width: 171px;
     height: 41px;
     padding-top: 13px;
 }
 
-.DemoHeader-link{
+.AppHeader-link{
     text-decoration: none;
     color: $black !important;
     padding: 0 20px;
@@ -29,15 +29,15 @@
     line-height: 64px;
 }
 
-.DemoHeader-link:hover{
+.AppHeader-link:hover{
     background-color: $background;
 }
 
-.DemoHeader-github{
+.AppHeader-github{
     margin-top: 17px;
     margin-left: 10px;
 }
 
-.DemoHeader-spacer{
+.AppHeader-spacer{
     padding-top: 64px;
 }
