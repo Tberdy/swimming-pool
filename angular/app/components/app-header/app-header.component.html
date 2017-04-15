@@ -9,6 +9,10 @@
                     <a hide-xs class="AppHeader-link md-subhead" ui-sref="app.friends">Amis</a>
                     <a hide-xs class="AppHeader-link md-subhead" ui-sref="app.landing">Photos</a>
                 </div>
+                <div>
+                    <a hide-xs class="AppHeader-link md-subhead" ng-if="vm.isAuth()" ui-sref="app.profile({ id_user: vm.user.id })">{{vm.user.firstname}} {{vm.user.name}}</a>
+                    <a hide-xs class="AppHeader-link md-subhead" ng-if="!vm.isAuth()" ui-sref="app.login">Login</a>
+                </div>
             </div>
         </div>
     </div>

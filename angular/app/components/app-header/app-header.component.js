@@ -1,16 +1,27 @@
 class AppHeaderController {
-    constructor($sce, API) {
+    constructor($sce, API, $auth) {
         'ngInject';
 
         this.$sce = $sce;
         this.API = API;
+        this.$auth = $auth;
+        
+        
+    }
+    
+    $onInit(){
         this.user = {};
-        this.getUser();
+        if(this.isAuth()) this.getUser();
+    }
+
+    isAuth() {
+        return this.$auth.isAuthenticated();
     }
 
     getUser() {
         this.API.all('user').get('')
                 .then((response) => {
+                    this.user = angular.copy(response);
                     console.log(response);
                 });
     }
