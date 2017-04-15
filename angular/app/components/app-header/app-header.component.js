@@ -5,13 +5,13 @@ class AppHeaderController {
         this.$sce = $sce;
         this.API = API;
         this.user = {};
+        this.getUser();
     }
 
     getUser() {
-        this.API.all('posts').get('')
+        this.API.all('user').get('')
                 .then((response) => {
                     console.log(response);
-                    this.posts = response.data;
                 });
     }
 }
