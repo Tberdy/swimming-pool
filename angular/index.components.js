@@ -1,3 +1,4 @@
+import {FriendsListComponent} from './app/components/friends-list/friends-list.component';
 import {AppHeaderComponent} from './app/components/app-header/app-header.component';
 import {AppRootComponent} from './app/components/app-root/app-root.component';
 import {AppShellComponent} from './app/components/app-shell/app-shell.component';
@@ -7,6 +8,7 @@ import {LoginFormComponent} from './app/components/login-form/login-form.compone
 import {RegisterFormComponent} from './app/components/register-form/register-form.component';
 
 angular.module('app.components')
+	.component('friendsList', FriendsListComponent)
 	.component('appHeader', AppHeaderComponent)
 	.component('appRoot', AppRootComponent)
 	.component('appShell', AppShellComponent)
