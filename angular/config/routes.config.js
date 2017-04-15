@@ -69,9 +69,23 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
             })
             .state('app.friends', {
                 url: '/friends',
+                data: {
+                    auth: true
+                },
                 views: {
                     'main@': {
                         templateUrl: getView('friends')
+                    }
+                }
+            })
+            .state('app.profile', {
+                url: '/profile/:id_user',
+                data: {
+                    auth: true
+                },
+                views: {
+                    'main@': {
+                        templateUrl: getView('profile')
                     }
                 }
             });
