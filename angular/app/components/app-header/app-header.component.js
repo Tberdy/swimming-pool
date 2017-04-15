@@ -1,14 +1,18 @@
-class AppHeaderController{
-    constructor($sce){
+class AppHeaderController {
+    constructor($sce, API) {
         'ngInject';
 
         this.$sce = $sce;
+        this.API = API;
+        this.user = {};
     }
 
-    $onInit(){
-        //defer iframe loading
-        let url = 'https://ghbtns.com/github-btn.html?user=jadjoubran&repo=laravel5-angular-material-starter&type=star&count=true&size=large';
-        this.githubWidget = this.$sce.trustAsResourceUrl(url);
+    getUser() {
+        this.API.all('posts').get('')
+                .then((response) => {
+                    console.log(response);
+                    this.posts = response.data;
+                });
     }
 }
 
@@ -17,4 +21,4 @@ export const AppHeaderComponent = {
     controller: AppHeaderController,
     controllerAs: 'vm',
     bindings: {}
-}
+};
