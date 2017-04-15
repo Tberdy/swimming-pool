@@ -8,5 +8,6 @@ public/js
 public/css
 public/build
 public/views
+public/service-worker.js
 nbproject/private
 .DS_Store
