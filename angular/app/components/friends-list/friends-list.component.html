@@ -10,13 +10,12 @@
         </div>
         !-->
         <table style="width:100%">
-            <tr ng-repeat="person in vm.people" class = "noright" ng-click="vm.goToPerson(person.name, $event)">
+            <tr ng-repeat="person in vm.people" class = "friends-box" ng-click="vm.goToPerson(person.name, $event)">
                 <th><img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
                 <th>{{ person.name}}</th> 
                 <th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i></th>
                 <th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">message</i></th>
-                <th><md-checkbox class="friends-checkbox" ng-model="person.selected"></md-checkbox></th>
-
+                <!--<th class="friends-checkbox"><md-checkbox  ng-model="person.selected"></md-checkbox></th>!-->
             </tr>
     </md-list-item>
 
