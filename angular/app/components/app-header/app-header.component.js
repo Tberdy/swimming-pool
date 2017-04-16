@@ -1,14 +1,13 @@
 class AppHeaderController {
-    constructor($sce, API, $auth) {
+    constructor($sce, API, $auth, CurrentUserService) {
         'ngInject';
 
         this.$sce = $sce;
         this.API = API;
         this.$auth = $auth;
-        
-        
+        this.user = CurrentUserService;
     }
-    
+    /*
     $onInit(){
         this.user = {};
         if(this.isAuth()) this.getUser();
@@ -25,6 +24,7 @@ class AppHeaderController {
                     console.log(response);
                 });
     }
+    */
 }
 
 export const AppHeaderComponent = {

@@ -2,14 +2,21 @@ export class CurrentUserService {
     constructor($auth, API) {
         'ngInject';
         this.$auth = $auth;
+        this.API = API;
         this.data = {};
+        
+        if(this.isAuth()) this.getUser();
     }
-
-    get() {
-        return data;
+    
+    getUser() {
+        this.API.all('user').get('')
+                .then((response) => {
+                    this.data = angular.copy(response);
+                    console.log(response);
+                });
     }
-
-    isAuthenticated() {
+    
+    isAuth() {
         return this.$auth.isAuthenticated();
     }
 }
