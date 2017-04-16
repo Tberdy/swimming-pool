@@ -1,8 +1,8 @@
 class FriendsListController {
-    constructor(Dialog) {
+    constructor(DialogService) {
         'ngInject';
 
-        this.Dialog = Dialog;
+        this.Dialog = DialogService;
     }
 
     $onInit() {
