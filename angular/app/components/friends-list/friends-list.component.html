@@ -1,17 +1,24 @@
-<div layout="column" class="Landing-cover" layout-align="center center">
-    <!--
-    <md-list ng-controller="ListCtrl" ng-cloak="" class="listdemoListControls" ng-app="MyApp">    
-        <md-subheader class="md-no-sticky">Mes amis</md-subheader>
-        <md-list-item ng-repeat="person in people" ng-click="goToPerson(person.name, $event)" class="noright">
-            <img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar">
-            <p>{{ person.name}}</p>
-            <md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
-            <md-icon md-svg-icon="communication:email" ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3"></md-icon>
-            <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon>
-        </md-list-item>
-    </md-list>
-    !-->
-    <md-list ng-cloak="" class="listdemoListControls">
-        <md-subheader class="md-no-sticky">Mes amis</md-subheader>
-    </md-list>
-</div>
+<md-list ng-cloak="" class="listdemoListControls">    
+    <md-subheader class="md-no-sticky">Mes amis</md-subheader>
+    <md-list-item >
+        <!--
+        <div class="friends-box" >
+
+
+            <i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i>
+            <i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">message</i>
+        </div>
+        !-->
+        <table style="width:100%">
+            <tr ng-repeat="person in vm.people" class = "noright" ng-click="vm.goToPerson(person.name, $event)">
+                <th><img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
+                <th>{{ person.name}}</th> 
+                <th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i></th>
+                <th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">message</i></th>
+                <th><md-checkbox class="friends-checkbox" ng-model="person.selected"></md-checkbox></th>
+
+            </tr>
+    </md-list-item>
+
+</md-list>
+
