@@ -7,9 +7,9 @@ class FriendsListController {
 
     $onInit() {
         this.people = [
-            {name: 'Janet Perkins', img: 'img/100-0.jpeg', newMessage: true},
-            {name: 'Mary Johnson', img: 'img/100-1.jpeg', newMessage: false},
-            {name: 'Peter Carlsson', img: 'img/100-2.jpeg', newMessage: false}
+            {name: 'Taha Miyara', img: 'img/example/taha.jpg', newMessage: true},
+            {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', newMessage: false},
+            {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', newMessage: false}
         ];
         /*
         angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
