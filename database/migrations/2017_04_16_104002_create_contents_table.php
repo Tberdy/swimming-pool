@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFriendshipTable extends Migration
+class CreateContentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateFriendshipTable extends Migration
      */
     public function up()
     {
-        Schema::create('friendship', function (Blueprint $table) {
+        Schema::create('contents', function(Blueprint $table) {
             $table->increments('id');
             
-            $table->integer('id_from')->unsigned();
-            $table->foreign('id_from')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('id_to')->unsigned();
-            $table->foreign('id_to')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('id_user')->unsigned();
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            
+            $table->integer('type');
+            $table->string('text', 10000);
+            $table->dateTime('date');
+            $table->string('file', 255);
             
             $table->timestamps();
         });
@@ -32,6 +35,6 @@ class CreateFriendshipTable extends Migration
      */
     public function down()
     {
-        Schema::drop('friendship');
+        //
     }
 }

@@ -28,16 +28,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 
-//Route::post('/users/add', )->middleware('auth:api');
+Route::get('/user/get', 'UserController@get');
+Route::get('/user/list', 'UserController@getList');
+Route::post('/user/update', 'UserController@update');
+Route::post('/user/delete', 'UserController@delete');
 
-Route::get('/users/list', function (Request $request) {
-    
-})->middleware('auth:api');
 
-Route::post('/users/edit', function (Request $request) {
-    
-})->middleware('auth:api');
-
-Route::post('/users/delete', function (Request $request) {
-    
-})->middleware('auth:api');

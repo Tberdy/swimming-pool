@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFriendshipTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateFriendshipTable extends Migration
      */
     public function up()
     {
-        Schema::create('friendship', function (Blueprint $table) {
+        Schema::create('comments', function(Blueprint $table) {
             $table->increments('id');
             
-            $table->integer('id_from')->unsigned();
-            $table->foreign('id_from')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('id_to')->unsigned();
-            $table->foreign('id_to')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('id_content')->unsigned();
+            $table->foreign('id_content')->references('id')->on('contents')->onDelete('cascade');
+            
+            $table->string('text', 10000);
             
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ class CreateFriendshipTable extends Migration
      */
     public function down()
     {
-        Schema::drop('friendship');
+        Schema::drop('comments');
     }
 }
