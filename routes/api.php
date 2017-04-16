@@ -26,3 +26,18 @@ Route::post('auth/password/reset', 'Auth\PasswordResetController@reset');
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+
+//Route::post('/users/add', )->middleware('auth:api');
+
+Route::get('/users/list', function (Request $request) {
+    
+})->middleware('auth:api');
+
+Route::post('/users/edit', function (Request $request) {
+    
+})->middleware('auth:api');
+
+Route::post('/users/delete', function (Request $request) {
+    
+})->middleware('auth:api');
