@@ -3,19 +3,32 @@ export class CurrentUserService {
         'ngInject';
         this.$auth = $auth;
         this.API = API;
-        this.data = {};
-        
-        if(this.isAuth()) this.getUser();
+        this.data = null;
+
+        if (this.isAuth())
+            this.retrieveUser();
     }
-    
-    getUser() {
-        this.API.all('user').get('')
+
+    retrieveUser() {
+        return this.API.all('user').get('')
                 .then((response) => {
                     this.data = angular.copy(response);
-                    console.log(response);
+                    return response;
                 });
     }
-    
+
+    getUser() {
+        if (this.data !== null) {
+            return this.data;
+        } else {
+            return {
+                getUser: this.retrieveUser()
+            };
+        }
+
+
+    }
+
     isAuth() {
         return this.$auth.isAuthenticated();
     }

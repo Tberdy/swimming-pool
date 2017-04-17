@@ -76,6 +76,11 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
                     'main@': {
                         templateUrl: getView('friends')
                     }
+                },
+                resolve: {
+                    user: function (CurrentUserService) {
+                        return CurrentUserService.getUser();
+                    }
                 }
             })
             .state('app.profile', {

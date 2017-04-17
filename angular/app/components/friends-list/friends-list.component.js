@@ -1,10 +1,31 @@
 class FriendsListController {
-    constructor(DialogService) {
+    constructor(DialogService, API, CurrentUserService) {
         'ngInject';
         this.Dialog = DialogService;
+        this.API = API;
+        this.user = CurrentUserService;
+    }
+
+    getFriends() {
+        this.API.all('user/friends/list').get('', {
+            id: this.user.data.id
+        }).then((response) => {
+            this.friends = angular.copy(response.data.friends);
+        });
+    }
+
+    addFriend() {
+        this.API.all('user/friends/add').get('', {
+            id: this.user.data.id,
+            friend_id: ''
+        }).then((response) => {
+            this.friends = angular.copy(response.data.friends);
+        });
     }
 
     $onInit() {
+        this.friends = [];
+        this.getFriends();
         this.people = [
             {name: 'Taha Miyara', img: 'img/example/taha.jpg', newMessage: true},
             {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', newMessage: false},
