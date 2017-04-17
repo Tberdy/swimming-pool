@@ -1,3 +1,5 @@
+import {FriendSelectionController} from '../../../dialogs/friendSelection/friendSelection.dialog.js';
+
 class FriendsListController {
     constructor(DialogService, API, CurrentUserService) {
         'ngInject';
@@ -27,9 +29,9 @@ class FriendsListController {
         this.friends = [];
         this.getFriends();
         this.people = [
-            {name: 'Taha Miyara', img: 'img/example/taha.jpg', newMessage: true},
-            {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', newMessage: false},
-            {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', newMessage: false}
+            {name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
+            {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
+            {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
         ];
         /*
          angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
@@ -69,7 +71,7 @@ class FriendsListController {
      }
      */
     goToPerson(person, event) {
-        this.Dialog.fromTemplate('friendSelection');
+        
     }
     navigateTo(to, event) {
         this.Dialog.show(
@@ -91,6 +93,18 @@ class FriendsListController {
                 .ok('Awesome!')
                 .targetEvent(event)
                 );
+    }
+    deleteSelection()
+    {
+        //return this.Dialog.fromTemplate('confirmDelete');
+    }
+    friendsSelection()
+    {
+        let options = {
+            controller: FriendSelectionController,
+            controllerAs: 'vm'
+        }
+        return this.Dialog.fromTemplate('friendSelection',options);
     }
 }
 
