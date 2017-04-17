@@ -15,7 +15,15 @@ class FriendsListController {
             this.friends = angular.copy(response.data.friends);
         });
     }
-
+    /*
+    deleteFriends(){
+        this.API.all('user/friends/delete').post('',{
+         
+         id:user_id,
+         friend_id:friend_id
+     })
+    }
+    */
     addFriend() {
         this.API.all('user/friends/add').get('', {
             id: this.user.data.id,
