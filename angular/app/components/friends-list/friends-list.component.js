@@ -70,7 +70,7 @@ class FriendsListController {
                         parent: this,
                     }
         }
-        var a = this.Dialog.fromTemplate('friendSelection', options).then(alert(a));
+        this.Dialog.fromTemplate('friendSelection', options);
         //alert(a);
     }
 }
