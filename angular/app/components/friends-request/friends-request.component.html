@@ -1,0 +1,14 @@
+<md-list ng-cloak="" class="listdemoListControls friends-background">    
+    <md-subheader class="md-no-sticky">Mes invitations</md-subheader>
+    <md-list-item >
+        <table style="width:100%">
+            <tr ng-repeat="person in vm.people" class = "friends-box" ng-click="">
+                <th><img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
+                <th>{{ person.name}}</th> 
+                <!--<th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i></th>!-->
+                <th><md-button class="md-raised md-primary" ng-click="">Accepter</md-button></th>
+                <th><md-button class="md-raised md-warn" ng-click="">Refuser</md-button></th>
+            </tr>
+    </md-list-item>
+</md-list>
+
