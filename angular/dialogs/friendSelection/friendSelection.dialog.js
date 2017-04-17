@@ -1,13 +1,14 @@
 export class FriendSelectionController {
-    constructor(DialogService, API, parent, $timeout, $q, $log) {
+    constructor(DialogService, API, FriendsQueryService, parent, $timeout, $q, $log) {
         'ngInject';
         this.Dialog = DialogService;
+        this.FriendsQuery = FriendsQueryService;
         this.API = API;
         this.parent = parent;
         this.name = name;
         this.users = this.loadAll();
         this.parent = parent;
-        //this.event = $event;
+        this.message = "";
         this.timeout = $timeout;
         this.q = $q;
         this.log = $log;
@@ -15,88 +16,58 @@ export class FriendSelectionController {
 
     }
     save() {
-//Logic here
-        this.Dialog.hide("wesh");
+        
+        //Valid select item
+        if(this.selectedItem===null)
+        {
+           this.message = "undefined";
+           return; 
+        }
+        alert(this.selectedItem.name);
+        //Already friend or invitation sent
+        var friendsList = this.FriendsQuery.getFriends(this.currentUser.data.id);
+        for (var i in friendsList)
+        {
+            if (friendsList[i].id === this.selectedItem.id)
+            {
+                this.message = "already";
+                return;
+            }
+        }
+
+        this.FriendsQuery.addFriend(this.selectedItem.id);
+        this.Dialog.hide();
     }
 
     cancel() {
-//alert('Cancel Button Pressed');
-        this.Dialog.cancel("nope");
+        //alert('Cancel Button Pressed');
+        this.Dialog.cancel();
     }
     //Load of all the users
-     loadAll() {
-     this.API.all('user/list').get('')
-     .then((response) => {
-     this.users = angular.copy(response.data.users);
-     });
-     }
-
-// ******************************
-// Internal methods
-// ******************************
-
-    /**
-     * Search for states... use $timeout to simulate
-     * remote dataservice call.
-     */
-    /*
     loadAll() {
-        var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-              Wisconsin, Wyoming';
-
-        return allStates.split(/, +/g).map(function (state) {
-            return {
-                value: state.toLowerCase(),
-                display: state
-            };
-        });
+        alert(this.display(this.FriendsQuery.allUsers[0]));
+        this.users=this.FriendsQuery.allUsers;
     }
-    */
+    display(user)
+    {
+        return user.firstname + " " + user.name;
+    }
     querySearch(query) {
-       
-        var results=[];
-        var re=query+"+";
-        var regex=new RegExp(re,"i");
+
+        var results = [];
+        var re = query + "+";
+        var regex = new RegExp(re, "i");
         for (var k in this.users) {
-            var display=this.users[k].firstname+" "+this.users[k].name;
-            if(regex.test(display))
+            
+            if (regex.test(this.display(this.user[k])))
             {
-                results.push(display);
+                results.push(this.user[k]);
             }
         }
         return results;
     }
 
-    searchTextChange(text) {
-        this.log.info('Text changed to ' + text);
-    }
-
-    selectedItemChange(item) {
-        this.log.info('Item changed to ' + JSON.stringify(item));
-    }
-
-    /**
-     * Build `states` list of key/value pairs
-     */
-
-    newState(state) {
-        alert("Sorry! You'll need to create a Constitution for " + state + " first!");
-    }
-
-    /**
-     * Create filter function for a query string
-     */
-    createFilterFor(query) {
-        var lowercaseQuery = angular.lowercase(query);
-        return function filterFn(state) {
-            return (state.value.indexOf(lowercaseQuery) === 0);
-        };
-    }
+   
 }
 export const FriendsSelectionComponent = {
     controller: FriendSelectionController,

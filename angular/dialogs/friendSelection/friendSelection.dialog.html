@@ -20,7 +20,7 @@
                             md-search-text="vm.searchText"
                             md-selected-item-change="vm.selectedItemChange(item)"
                             md-items="item in vm.querySearch(vm.searchText)"
-                            md-item-text="item"
+                            md-item-text="vm.display(item)"
                             md-min-length="0"
                             placeholder="Rechercher un utilisateur...">
                             <md-item-template>
@@ -29,6 +29,10 @@
                             <md-not-found>
                                 Pas d'utilisateur ne correspond à "{{vm.searchText}}".
                             </md-not-found>
+                            <div ng-messages="vm.message">
+                                <div ng-message="already">Vous avez déjà envoyé une invitation à cette utilisateur !</div>
+                                <div ng-message="undefined">L'utilisateur n'existe pas !</div>
+                            </div>
                         </md-autocomplete>
                         <br/>
                     </form>
@@ -37,8 +41,8 @@
         </md-dialog-content>
 
         <md-dialog-actions>
-            <md-button type="button" ng-click="vm.cancel()">Cancel</md-button>
-            <md-button class="md-primary md-raised" type="submit">Save</md-button>
+            <md-button type="button" ng-click="vm.cancel()">Annuler</md-button>
+            <md-button class="md-primary md-raised" type="submit">Ajouter</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

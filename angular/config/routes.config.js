@@ -80,6 +80,9 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
                 resolve: {
                     user: function (CurrentUserService) {
                         return CurrentUserService.getUser();
+                    },
+                    friends: function(FriendsQueryService){
+                        return FriendsQueryService.getUser();
                     }
                 }
             })
