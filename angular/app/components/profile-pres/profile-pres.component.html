@@ -1,0 +1,38 @@
+<div layout="row" class="" layout-align="center start">
+    <div class="profile-resume">
+        <md-card>
+            <img ng-src="{{vm.profile.ppLink}}" class="md-card-image profile-picture">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{vm.profile.firstname}} {{vm.profile.name}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>{{vm.profile.birthdate}}</p>
+                <p ng-if="vm.profile.gender === 1">Homme</p>
+                <p ng-if="vm.profile.gender === 2">Femme</p>
+            </md-card-content>
+        </md-card>
+    </div>
+    
+    <div class="profile-content">
+        <div layout="column">
+            <div><img ng-src="{{vm.profile.ppLink}}"></div>
+        </div>
+        <md-card ng-repeat="content in vm.profileContents">
+            <img ng-if="content.type === 3" ng-src="{{content.file}}" class="md-card-image">
+            <md-card-content>
+                <p ng-if="content.type === 2">{{content.date}}</p>
+                <p>{{content.text}}</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="Like">
+                <md-button class="md-icon-button" aria-label="Favorite">
+                    <i class="material-icons">favorite</i>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Comment">
+                    <i class="material-icons">insert_comment</i>
+                </md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+</div>
