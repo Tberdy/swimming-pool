@@ -1,18 +1,27 @@
-export class FriendSelectionController{
-    constructor(DialogService,parent,name){
+export class FriendSelectionController {
+    constructor(DialogService, API, parent, name) {
         'ngInject';
-        this.Dialog= DialogService;
-        this.parent=parent;
-        this.name=name;
+        this.Dialog = DialogService;
+        this.API = API;
+        this.parent = parent;
+        this.name = name;
+        this.usersList = [];
     }
-    save(){
+    save() {
         //Logic here
         this.Dialog.hide("wesh");
     }
 
-    cancel(){
+    cancel() {
         //alert('Cancel Button Pressed');
         this.Dialog.cancel("nope");
+    }
+
+    getUsersList() {
+        this.API.all('user/list').get('')
+                .then((response) => {
+                    this.usersList = angular.copy(response.data.users);
+                });
     }
 }
 
