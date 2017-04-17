@@ -47,4 +47,22 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    
+    /**
+    * Return a key value array, containing any friends I added
+    *
+    * @return array
+    */
+    public function friendsIAdded() {
+        return $this->belongsToMany('App\User', 'friendship', 'id_from', 'id_to');
+    }
+    
+    /**
+    * Return a key value array, containing any user who add me as friends
+    *
+    * @return array
+    */
+    public function friendsWhoAddMe() {
+        return $this->belongsToMany('App\User', 'friendship', 'id_to', 'id_from');
+    }
 }

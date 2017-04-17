@@ -28,9 +28,12 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 
-Route::get('/user/get', 'UserController@get');
-Route::get('/user/list', 'UserController@getList');
-Route::post('/user/update', 'UserController@update');
-Route::post('/user/delete', 'UserController@delete');
+Route::get('user/get', 'UserController@get');
+Route::get('user/list', 'UserController@getList');
+Route::post('user/update', 'UserController@update');
+Route::post('user/delete', 'UserController@delete');
 
-
+Route::get('user/friends/list', 'UserController@listFriends');
+Route::get('user/friends/add', 'UserController@addFriend');
+Route::get('user/friends/confirm', 'UserController@confirmFriend');
+Route::get('user/friends/delete', 'UserController@deleteFriend');
