@@ -9,7 +9,9 @@
 }
 .friends-checkbox
 {
-    position: relative;
-    left: 30px;
-    bottom: 5px;
+    padding-left: 40px;
+}
+.friends-checkbox > md-checkbox
+{
+    top: 110% !important;
 }

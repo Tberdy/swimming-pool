@@ -1,7 +1,6 @@
 class FriendsListController {
     constructor(DialogService) {
         'ngInject';
-
         this.Dialog = DialogService;
     }
 
@@ -12,15 +11,15 @@ class FriendsListController {
             {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', newMessage: false}
         ];
         /*
-        angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
-                .config(function ($mdIconProvider) {
-                    $mdIconProvider
-                            .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
-                            .iconSet('device', 'img/icons/sets/device-icons.svg', 24)
-                            .iconSet('communication', 'img/icons/sets/communication-icons.svg', 24)
-                            .defaultIconSet('img/icons/sets/core-icons.svg', 24);
-                })
-        */
+         angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
+         .config(function ($mdIconProvider) {
+         $mdIconProvider
+         .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
+         .iconSet('device', 'img/icons/sets/device-icons.svg', 24)
+         .iconSet('communication', 'img/icons/sets/communication-icons.svg', 24)
+         .defaultIconSet('img/icons/sets/core-icons.svg', 24);
+         })
+         */
     }
 
     doSecondaryAction(event) {
@@ -34,17 +33,23 @@ class FriendsListController {
                 );
     }
 
+    /*
+     goToPerson(person, event) {
+     this.Dialog.show(
+     this.Dialog.alert('Test');
+     
+     .title('Navigating')
+     .textContent('Wesh ' + person)
+     .ariaLabel('Person inspect demo')
+     .ok('Neat!')
+     .targetEvent(event)
+     );
+     
+     }
+     */
     goToPerson(person, event) {
-        this.Dialog.show(
-                this.Dialog.alert()
-                .title('Navigating')
-                .textContent('Inspect ' + person)
-                .ariaLabel('Person inspect demo')
-                .ok('Neat!')
-                .targetEvent(event)
-                );
+        this.Dialog.fromTemplate('friendSelection');
     }
-
     navigateTo(to, event) {
         this.Dialog.show(
                 this.Dialog.alert()
