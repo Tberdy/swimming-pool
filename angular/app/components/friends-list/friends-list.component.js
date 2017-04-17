@@ -1,3 +1,5 @@
+import {FriendSelectionController} from '../../../dialogs/friendSelection/friendSelection.dialog.js';
+
 class FriendsListController {
     constructor(DialogService) {
         'ngInject';
@@ -77,7 +79,11 @@ class FriendsListController {
     }
     friendsSelection()
     {
-        return this.Dialog.fromTemplate('friendSelection');
+        let options = {
+            controller: FriendSelectionController,
+            controllerAs: 'vm'
+        }
+        return this.Dialog.fromTemplate('friendSelection',options);
     }
 }
 
