@@ -12,7 +12,7 @@ export class CurrentUserService {
         this.API.all('user').get('')
                 .then((response) => {
                     this.data = angular.copy(response);
-                    console.log(response);
+                    //console.log(response);
                 });
     }
     

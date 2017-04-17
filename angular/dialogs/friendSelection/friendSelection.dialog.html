@@ -1,25 +1,21 @@
 <md-dialog>
     <form ng-submit="vm.save()">
 
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Friend : {{vm.name}} </h2>
-            </div>
-        </md-toolbar>
-        <md-list-item >
-            <table style="width:100%">
-                <tr ng-repeat="person in vm.parent.people" ng-click="">
-                    <th><img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
-                    <th>{{ person.name}}</th> 
-
-                </tr>
-        </md-list-item>
         <md-dialog-content>
             <div class="md-dialog-content">
-                <md-input-container flex>
-                    <label>Data</label>
-                    <input type="text">
-                </md-input-container>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2>Friend : {{vm.name}} </h2>
+                    </div>
+                </md-toolbar>
+                <md-list-item>
+                    <table style="width:100%">
+                        <tr ng-repeat="person in vm.parent.people" ng-click="">
+                            <th><img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
+                            <th>{{ person.name}}</th>
+                        </tr>
+                    </table>
+                </md-list-item>
             </div>
         </md-dialog-content>
 

@@ -35,23 +35,6 @@ class FriendsListController {
                 );
     }
 
-    /*
-     goToPerson(person, event) {
-     this.Dialog.show(
-     this.Dialog.alert('Test');
-     
-     .title('Navigating')
-     .textContent('Wesh ' + person)
-     .ariaLabel('Person inspect demo')
-     .ok('Neat!')
-     .targetEvent(event)
-     );
-     
-     }
-     */
-    goToPerson(person, event) {
-        
-    }
     navigateTo(to, event) {
         this.Dialog.show(
                 this.Dialog.alert()
@@ -81,9 +64,14 @@ class FriendsListController {
     {
         let options = {
             controller: FriendSelectionController,
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            locals:
+                    {
+                        parent: this,
+                    }
         }
-        return this.Dialog.fromTemplate('friendSelection',options);
+        var a = this.Dialog.fromTemplate('friendSelection', options).then(alert(a));
+        //alert(a);
     }
 }
 

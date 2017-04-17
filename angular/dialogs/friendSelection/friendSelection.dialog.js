@@ -1,17 +1,18 @@
 export class FriendSelectionController{
-    constructor(DialogService){
+    constructor(DialogService,parent,name){
         'ngInject';
-        this.name="Toto";
         this.Dialog= DialogService;
+        this.parent=parent;
+        this.name=name;
     }
     save(){
         //Logic here
-        this.Dialog.hide();
+        this.Dialog.hide("wesh");
     }
 
     cancel(){
         //alert('Cancel Button Pressed');
-        this.Dialog.cancel();
+        this.Dialog.cancel("nope");
     }
 }
 
