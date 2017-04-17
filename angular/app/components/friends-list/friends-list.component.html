@@ -1,23 +1,21 @@
-<md-list ng-cloak="" class="listdemoListControls">    
+<md-list ng-cloak="" class="listdemoListControls friends-background">    
     <md-subheader class="md-no-sticky">Mes amis</md-subheader>
     <md-list-item >
-        <!--
-        <div class="friends-box" >
-
-
-            <i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i>
-            <i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">message</i>
-        </div>
-        !-->
         <table style="width:100%">
             <tr ng-repeat="person in vm.people" class = "friends-box" ng-click="vm.goToPerson(person.name, $event)">
                 <th><img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
                 <th>{{ person.name}}</th> 
-                <th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i></th>
+                <!--<th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i></th>!-->
                 <th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">message</i></th>
-                <!--<th class="friends-checkbox"><md-checkbox  ng-model="person.selected"></md-checkbox></th>!-->
+                <th class="friends-checkbox"><md-checkbox  ng-model="person.selected"></md-checkbox></th>
             </tr>
     </md-list-item>
+    <br/>
+    <div>
+        <md-button class="md-raised md-primary" ng-click="vm.friendsSelection()">Ajouter un ami</md-button>
+        <md-button class="md-raised md-warn" ng-click="vm.deleteSelection()">Supprimer la selection</md-button>
+    </div>
+    
 
 </md-list>
 
