@@ -1,5 +1,5 @@
 <md-dialog>
-    <form ng-submit="vm.save()">
+    <form >
 
         <md-dialog-content>
             <div class="md-dialog-content">
@@ -24,16 +24,14 @@
                             md-min-length="0"
                             placeholder="Rechercher un utilisateur...">
                             <md-item-template>
-                                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item}}</span>
+                                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{vm.display(item)}}</span>
                             </md-item-template>
                             <md-not-found>
                                 Pas d'utilisateur ne correspond à "{{vm.searchText}}".
                             </md-not-found>
-                            <div ng-messages="vm.message">
-                                <div ng-message="already">Vous avez déjà envoyé une invitation à cette utilisateur !</div>
-                                <div ng-message="undefined">L'utilisateur n'existe pas !</div>
-                            </div>
+                            
                         </md-autocomplete>
+                        <div ng-submit="$event.preventDefault()">{{vm.message}}</div>
                         <br/>
                     </form>
                 </md-content>
@@ -42,7 +40,7 @@
 
         <md-dialog-actions>
             <md-button type="button" ng-click="vm.cancel()">Annuler</md-button>
-            <md-button class="md-primary md-raised" type="submit">Ajouter</md-button>
+            <md-button class="md-primary md-raised" ng-click="vm.save()">Ajouter</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

@@ -1,19 +1,15 @@
 import {FriendSelectionController} from '../../../dialogs/friendSelection/friendSelection.dialog.js';
 
 class FriendsListController {
-    constructor(DialogService, API, CurrentUserService) {
+    constructor(DialogService, API, CurrentUserService,FriendsQueryService) {
         'ngInject';
         this.Dialog = DialogService;
         this.API = API;
         this.user = CurrentUserService;
+        this.FriendsQuery= FriendsQueryService;
     }
-
     getFriends() {
-        this.API.all('user/friends/list').get('', {
-            id: this.user.data.id
-        }).then((response) => {
-            this.friends = angular.copy(response.data.friends);
-        });
+        return this.FriendsQuery.getFriends(this.user.data.id);
     }
     /*
     deleteFriends(){
@@ -34,8 +30,8 @@ class FriendsListController {
     }
 
     $onInit() {
+        this.currentFriends=this.FriendsQuery.getFriends(this.user.data.id);
         this.friends = [];
-        this.getFriends();
         this.people = [
             {name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
             {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},

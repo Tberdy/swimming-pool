@@ -82,7 +82,7 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
                         return CurrentUserService.getUser();
                     },
                     friends: function(FriendsQueryService){
-                        return FriendsQueryService.getUser();
+                        return "";
                     }
                 }
             })
