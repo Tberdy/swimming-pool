@@ -36,4 +36,4 @@ Route::post('user/delete', 'UserController@delete');
 Route::get('user/friends/list', 'UserController@listFriends');
 Route::get('user/friends/add', 'UserController@addFriend');
 Route::get('user/friends/confirm', 'UserController@confirmFriend');
-Route::get('user/friends/delete', 'UserController@deleteFriend');
+Route::post('user/friends/delete', 'UserController@deleteFriend');
