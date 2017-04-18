@@ -28,18 +28,20 @@ export class CurrentUserService {
     getUserPromise() {
         return this.API.all('user').get('');
     }
-    
+    getAllUsersPromise()
+    {
+        return this.API.all('user/list').get('');
+    }
     getAllUsers()
     {
         if (this.allUsers !== null) {
-            return this.allUsers;
+            return this.data;
         } else {
             return {
-                getAllUser: this.retrieveAllUsers()
+                getAllUsers: this.retrieveAllUsers()
             };
         }
     }
-    
     retrieveAllUsers() {
         return this.API.all('user/list').get('')
                 .then((response) => {

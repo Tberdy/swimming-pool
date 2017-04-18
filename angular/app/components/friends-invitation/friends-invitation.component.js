@@ -1,15 +1,33 @@
-class FriendsInvitationController{
-    constructor(DialogService) {
+class FriendsInvitationController {
+    constructor(DialogService, FriendsQueryService, CurrentUserService) {
         'ngInject';
         this.Dialog = DialogService;
+        this.FriendsQuery = FriendsQueryService;
+        this.CurrentUser = CurrentUserService;
+        this.user = null;
+        //this.friends = null;
+        this.friendsInvitation = null;
     }
 
     $onInit() {
-        this.people = [
-            {name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
-            {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
-            {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
-        ];
+        let promiseUser = this.CurrentUser.getUserPromise();
+        promiseUser.then((response) => {
+            this.user = angular.copy(response);
+            let promiseFriends = this.FriendsQuery.getInvitationsPromise(this.user.id);
+            promiseFriends.then((response) => {
+                this.friendsInvitation = angular.copy(response.data.fInvitations);
+                console.log(this.friendsInvitation);
+            });
+        });
+
+    }
+    addFriend(friendId)
+    {
+        let promise = this.FriendsQuery.addFriendsPromise(this.user.id, friendId)
+        promise.then((response) => {
+            //refresh
+            console.log("Friend added");
+        });
     }
 }
 

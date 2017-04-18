@@ -6,11 +6,30 @@ class FriendsListController {
         'ngInject';
         this.Dialog = DialogService;
         this.API = API;
-        this.user = CurrentUserService;
+        this.CurrentUser = CurrentUserService;
         this.FriendsQuery= FriendsQueryService;
         this.message="";
-        this.currentFriends=[];
         this.emptyQuery=true;
+        this.user=null;
+        this.currentFriends=null;
+    }
+    
+    $onInit() {
+        let promiseUser = this.CurrentUser.getUserPromise();
+        promiseUser.then((response) => {
+            this.user = angular.copy(response);
+            let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
+            promiseFriends.then((response) => {
+                this.currentFriends = angular.copy(response.data.friends);
+            });
+        });
+        /*
+         this.people = [
+         {name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
+         {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
+         {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
+         ];
+         */
     }
     display(user)
     {
@@ -35,36 +54,9 @@ class FriendsListController {
         return this.currentFriends;
 
     }
-    getFriends() {
-        return this.FriendsQuery.getFriends(this.user.data.id);
-    }
     
-    addFriend() {
-        this.API.all('user/friends/add').get('', {
-            id: this.user.data.id,
-            friend_id: ''
-        }).then((response) => {
-            this.friends = angular.copy(response.data.friends);
-        });
-    }
 
-    $onInit() {
-        
-        //Template
-        this.currentFriends = [
-            {id:1,name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
-            {id:2,name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
-            {id:3,name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
-        ];
-        /*
-         * this.currentFriends=this.FriendsQuery.getFriends(this.user.data.id);
-         * for(var k in this.currentFriends)
-         * {
-         *  this.currentFriends[k].selected=false;
-         * }
-         */
-        
-    }
+    
 
     deleteSelection()
     {

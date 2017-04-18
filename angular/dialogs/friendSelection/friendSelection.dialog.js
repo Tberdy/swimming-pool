@@ -5,24 +5,37 @@ export class FriendSelectionController {
         this.FriendsQuery = FriendsQueryService;
         this.API = API;
         this.parent = parent;
-        this.currentUser = CurrentUserService;
-        this.users = this.loadAll();
+        this.CurrentUser = CurrentUserService;
+        this.users = null;
+        this.user = null;
+        this.friendsInvitation = null;
+        this.friends = null;
         this.parent = parent;
         this.message = "";
         this.isDisabled = false;
+        this.$onInit();
+    }
+    $onInit() {
+        let promiseUsers = this.CurrentUser.getAllUsersPromise();
+        promiseUsers.then((response) => {
+            this.users = angular.copy(response.data.users);
+        });
+        let promiseUser = this.CurrentUser.getUserPromise();
+        promiseUser.then((response) => {
+            this.user = angular.copy(response);
+            let promiseInvitation = this.FriendsQuery.getRequestsPromise(this.user.id);
+            promiseInvitation.then((response) => {
+                this.friendsInvitation = angular.copy(response.data.fRequests);
 
-        //temporary solution
-        /*
-        this.API.all('user/list').get('')
-                .then((response) => {
-                    this.users = angular.copy(response.data.users);
-                });
-        */
-        //console.log("test :"+ this.users);
-
+            });
+            let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
+            promiseFriends.then((response) => {
+                this.friends = angular.copy(response.data.friens);
+            });
+        });
     }
     save() {
-        this.message="";
+        this.message = "";
         //Valid select item
         if (this.selectedItem === null)
         {
@@ -30,18 +43,28 @@ export class FriendSelectionController {
             return;
         }
         //Already friend or invitation sent
-        var friendsList = this.FriendsQuery.getFriends(this.currentUser.data.id);
-        for (var i in friendsList)
+
+        for (var i in this.friends)
         {
-            if (friendsList[i].id === this.selectedItem.id)
+            if (this.friends[i].id === this.selectedItem.id)
             {
-                this.message = "Vous avez déjà envoyé un requête à cette personne !";
+                this.message = "Vous êtes déjà ami(e) avec cette personne !";
                 return;
             }
         }
-
-        this.FriendsQuery.addFriends(this.selectedItem.id);
-        this.Dialog.hide();
+        for (var j in this.friendsInvitation)
+        {
+            if (this.friendsInvitation[j].id === this.selectedItem.id)
+            {
+                this.message = "Vous avez déjà envoyé une requête !";
+                return;
+            }
+        }
+        let promiseAdd = this.FriendsQuery.addFriendsPromise(this.user.id, this.selectedItem.id)
+        promiseAdd.then((response) => {
+            this.Dialog.hide();
+        });
+        
     }
 
     cancel() {
@@ -56,6 +79,7 @@ export class FriendSelectionController {
         return user.firstname + " " + user.name;
     }
     querySearch(query) {
+        console.log(this.users);
         if (query != "")
         {
             var results = [];
