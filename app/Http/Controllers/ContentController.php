@@ -3,41 +3,71 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User as User;
+use App\Content as Content;
 
-class ContentController extends Controller
-{
+class ContentController extends Controller {
+
     public function get(Request $request) {
-        $user = App\User::find($request->id);
-        return response()->success(compact('user'));
+        $content = Content::find($request->content_id);
+        return response()->success(compact('content'));
     }
 
-    public function getList() {
-        $users = App\User::get();
-        return response()->success(compact('users'));
+    public function listAll(Request $request) {
+        $user = User::find($request->id);
+        $contents = $user->contents()->get();
+        return response()->success(compact('contents'));
     }
 
-    public function update(Request $request) {
-        $this->validate($request, [
-            'firstname'  => 'required|min:3',
-            'name'       => 'required|min:3',
-            'password'   => 'required|min:8',
-            'gender'     => 'required',
-            'birthdate'  => 'required'
-        ]);
-        
-        $user = App\User::find($request->id);
-        
-        $user->firstname = trim($request->firstname);
-        $user->name = trim($request->name);
-        $user->email = trim(strtolower($request->email));
-        $user->password = bcrypt($request->password);
-        $user->gender = intval($request->gender);
-        $user->birthdate = date( "Y-m-d", strtotime($request->birthdate));
-        
-        $user->save();
+    public function listPosts(Request $request) {
+        $user = User::find($request->id);
+        $posts = $user->contents()->where('type', 'post')->get();
+        return response()->success(compact('posts'));
+    }
+
+    public function listEvents(Request $request) {
+        $user = User::find($request->id);
+        $events = $user->contents()->where('type', 'event')->get();
+        return response()->success(compact('events'));
+    }
+
+    public function listPictures(Request $request) {
+        $user = User::find($request->id);
+        $pictures = $user->contents()->where('type', 'picture')->get();
+        return response()->success(compact('pictures'));
+    }
+
+    public function addPost(Request $request) {        
+        $content = new Content;
+        $content->user_id = $request->id;
+        $content->type = 'post';
+        $content->text = trim($request->data->text);
+        $content->save();
+        return response()->success(array());
+    }
+
+    public function addEvent(Request $request) {
+        $content = new Content;
+        $content->user_id = $request->id;
+        $content->type = 'event';
+        $content->text = trim($request->data->text);
+        $content->date = date( "Y-m-d H:i:s", strtotime($request->data->date));
+        $content->save();
+        return response()->success(array());
+    }
+
+    public function addFile(Request $request) {
+        $content = new Content;
+        $content->user_id = $request->id;
+        $content->type = 'file';
+        $content->text = trim($request->data->text);
+        $content->file = '';
+        $content->save();
+        return response()->success(array());
     }
 
     public function delete(Request $request) {
-        App\User::destroy($request->id);
+        Content::find($request->content_id)->delete();
+        return response()->success(array());
     }
 }
