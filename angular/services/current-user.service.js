@@ -4,19 +4,11 @@ export class CurrentUserService {
         this.$auth = $auth;
         this.API = API;
         this.data = null;
+        this.allUsers=null;
         this.getAllUsers();
         if (this.isAuth())
             this.retrieveUser();
     }
-
-    retrieveUser() {
-        return this.API.all('user').get('')
-                .then((response) => {
-                    this.data = angular.copy(response);
-                    return response;
-                });
-    }
-
     getUser() {
         if (this.data !== null) {
             return this.data;
@@ -28,14 +20,31 @@ export class CurrentUserService {
 
 
     }
-    getAllUsers() {
-        
+    retrieveUser() {
+        return this.API.all('user').get('')
+                .then((response) => {
+                    this.data = angular.copy(response);
+                    return response;
+                });
+    }
+    
+    getAllUsers()
+    {
+        if (this.allUsers !== null) {
+            return this.allUsers;
+        } else {
+            return {
+                getAllUser: this.retrieveAllUsers()
+            };
+        }
+    }
+    
+    retrieveAllUsers() {
         return this.API.all('user/list').get('')
                 .then((response) => {
                     this.allUsers = angular.copy(response.data.users);
-                    console.log("service: " + response);
+                    //console.log("service: " + response);
                     return response.data.users;
-
                 });
     }
     isAuth() {

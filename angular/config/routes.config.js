@@ -81,7 +81,11 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
                     user: function (CurrentUserService) {
                         return CurrentUserService.getUser();
                     },
-                    friends: function(FriendsQueryService){
+                    userList: function (CurrentUserService)
+                    {
+                        return CurrentUserService.getAllUsers();
+                    },
+                    friends: function (FriendsQueryService) {
                         return "";
                     }
                 }

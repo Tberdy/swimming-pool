@@ -1,5 +1,5 @@
 export class FriendsQueryService{
-    constructor(CurrentUserService,API){
+    constructor(API){
         'ngInject';
         
         this.API=API;        

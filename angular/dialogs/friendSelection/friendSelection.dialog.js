@@ -6,17 +6,18 @@ export class FriendSelectionController {
         this.API = API;
         this.parent = parent;
         this.currentUser = CurrentUserService;
-        //this.users = this.loadAll();
+        this.users = this.loadAll();
         this.parent = parent;
         this.message = "";
         this.isDisabled = false;
 
         //temporary solution
+        /*
         this.API.all('user/list').get('')
                 .then((response) => {
                     this.users = angular.copy(response.data.users);
                 });
-
+        */
         //console.log("test :"+ this.users);
 
     }
@@ -51,7 +52,6 @@ export class FriendSelectionController {
     }
     //Load of all the users
     loadAll() {
-        console.log("loadAll : " + this.currentUser.allUsers);
         this.users = this.currentUser.allUsers;
     }
     display(user)
