@@ -11,16 +11,16 @@ class FriendsListController {
         this.message="";
         this.emptyQuery=true;
         this.user=null;
-        this.friendsInvitation=null;
+        this.currentFriends=null;
     }
     
     $onInit() {
         let promiseUser = this.CurrentUser.getUserPromise();
         promiseUser.then((response) => {
             this.user = angular.copy(response);
-            let promiseFriends = this.FriendsQuery.getInvitationsPromise(this.user.id);
+            let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
             promiseFriends.then((response) => {
-                this.friendsInvitation = angular.copy(response.data.fInvitations);
+                this.currentFriends = angular.copy(response.data.friends);
             });
         });
         /*
@@ -54,18 +54,7 @@ class FriendsListController {
         return this.currentFriends;
 
     }
-    getFriends() {
-        return this.FriendsQuery.getFriends(this.user.data.id);
-    }
     
-    addFriend() {
-        this.API.all('user/friends/add').get('', {
-            id: this.user.data.id,
-            friend_id: ''
-        }).then((response) => {
-            this.friends = angular.copy(response.data.friends);
-        });
-    }
 
     
 
