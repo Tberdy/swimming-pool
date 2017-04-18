@@ -113,6 +113,8 @@ class UserController extends Controller {
     public function deleteFriend(Request $request) {
         $user = User::find($request->id);
         $user->friendsIAdded()->detach($request->friend_id);
+        $friends = User::find($request->friend_id);
+        $friends->friendsIAdded()->detach($request->id);
         return response()->success(array());
     }
 
