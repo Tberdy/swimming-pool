@@ -25,34 +25,61 @@ export class FriendsQueryService {
      }
      }
      */
-    getFriends(userId) {
-
+    getInvitationsPromise(userId)
+    {
+        return this.API.all('user/friends/invitations/list').get('', {
+            id: userId
+        })
+    }
+    getRequestsPromise(userId)
+    {
+        return this.API.all('user/friends/invitations/list').get('', {
+            id: userId
+        })
+    }
+    getFriendsPromise(userId)
+    {
         return this.API.all('user/friends/list').get('', {
             id: userId
-        }).then((response) => {
-            angular.copy(response.data.friends);
-            return response.data.friends;
         });
     }
-
-    addFriends(friendId)
+    addFriendsPromise(userId,friendId)
     {
         return this.API.all('user/friends/add').get('', {
-            id: this.currentUser.data.id,
+            id: userId,
             friend_id: friendId
-        }).then((response) => {
-            angular.copy(response.data.friends);
-            return response.data.friends;
         });
     }
     deleteFriend(friendId, userId)
-    {
-        this.API.all('user/friends/delete').post('', {
+     {
+     this.API.all('user/friends/delete').post('', {
+     
+     id: userId,
+     friend_id: friendId
+     })
+     
+     }
+    /*
+     getFriends(userId) {
+     
+     return this.API.all('user/friends/list').get('', {
+     id: userId
+     }).then((response) => {
+     angular.copy(response.data.friends);
+     return response.data.friends;
+     });
+     }
+     addFriends(friendId)
+     {
+     return this.API.all('user/friends/add').get('', {
+     id: this.currentUser.data.id,
+     friend_id: friendId
+     }).then((response) => {
+     angular.copy(response.data.friends);
+     return response.data.friends;
+     });
+     }
+     */
 
-            id: userId,
-            friend_id: friendId
-        })
-
-    }
 }
 

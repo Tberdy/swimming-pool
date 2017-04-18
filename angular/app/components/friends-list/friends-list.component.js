@@ -12,6 +12,24 @@ class FriendsListController {
         this.currentFriends=[];
         this.emptyQuery=true;
     }
+    
+    $onInit() {
+        let promiseUser = this.CurrentUser.getUserPromise();
+        promiseUser.then((response) => {
+            this.user = angular.copy(response);
+            let promiseFriends = this.FriendsQuery.getInvitationsPromise(this.user.id);
+            promiseFriends.then((response) => {
+                this.friendsInvitation = angular.copy(response.data.friends);
+            });
+        });
+        /*
+         this.people = [
+         {name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
+         {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
+         {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
+         ];
+         */
+    }
     display(user)
     {
         return user.name;
@@ -48,23 +66,7 @@ class FriendsListController {
         });
     }
 
-    $onInit() {
-        
-        //Template
-        this.currentFriends = [
-            {id:1,name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
-            {id:2,name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
-            {id:3,name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
-        ];
-        /*
-         * this.currentFriends=this.FriendsQuery.getFriends(this.user.data.id);
-         * for(var k in this.currentFriends)
-         * {
-         *  this.currentFriends[k].selected=false;
-         * }
-         */
-        
-    }
+    
 
     deleteSelection()
     {
