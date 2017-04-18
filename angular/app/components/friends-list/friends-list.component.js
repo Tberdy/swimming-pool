@@ -23,17 +23,10 @@ class FriendsListController {
                 this.currentFriends = angular.copy(response.data.friends);
             });
         });
-        /*
-         this.people = [
-         {name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
-         {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
-         {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
-         ];
-         */
     }
     display(user)
     {
-        return user.name;
+        return user.firstname+ " " + user.name;
     }
     querySearch(query) {
         if (query != "")
@@ -54,10 +47,6 @@ class FriendsListController {
         return this.currentFriends;
 
     }
-    
-
-    
-
     deleteSelection()
     {
         //Load the selected friends

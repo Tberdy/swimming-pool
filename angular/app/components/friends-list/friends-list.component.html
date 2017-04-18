@@ -1,13 +1,13 @@
 <md-list ng-cloak="" class="listdemoListControls friends-background">    
     <md-subheader class="md-no-sticky">Mes amis</md-subheader>
     <md-list-item >
-        <table style="width:100%">
-            <tr ng-repeat="person in vm.currentFriends" class = "friends-box" ng-click="vm.goToProfil(person, $event)">
-                <th><img alt="{{person.firstname}} {{person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
-                <th>{{person.firstname}} {{person.name}}</th> 
+        <table layout="column" layout-align=" stretch" style="width:100%">
+            <tr layout="row" layout-align=" stretch" ng-repeat="person in vm.currentFriends" class = "friends-box" ng-click="vm.goToProfil(person, $event)">
+                <th style="width:10%!important"><img alt="{{person.firstname}} {{person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
+                <th style="width:30%!important">{{person.firstname}} {{person.name}}</th> 
                 <!--<th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i></th>!-->
-                <th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">message</i></th>
-                <th class="friends-checkbox"><md-checkbox  ng-model="person.selected"></md-checkbox></th>
+                <th style="width:30%!important"><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">message</i></th>
+                <th style="width:30%!important" class="friends-checkbox"><md-checkbox  ng-model="person.selected"></md-checkbox></th>
             </tr>
         </table>
     </md-list-item>

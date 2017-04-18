@@ -1,5 +1,5 @@
 export class FriendSelectionController {
-    constructor(DialogService, API, FriendsQueryService, CurrentUserService, parent) {
+    constructor(DialogService, API, FriendsQueryService, CurrentUserService, parent,$state) {
         'ngInject';
         this.Dialog = DialogService;
         this.FriendsQuery = FriendsQueryService;
@@ -13,6 +13,7 @@ export class FriendSelectionController {
         this.parent = parent;
         this.message = "";
         this.isDisabled = false;
+        this.$state=$state;
         this.$onInit();
     }
     $onInit() {
@@ -62,8 +63,10 @@ export class FriendSelectionController {
         }
         let promiseAdd = this.FriendsQuery.addFriendsPromise(this.user.id, this.selectedItem.id)
         promiseAdd.then((response) => {
+            this.$state.go('app.friends');
             this.Dialog.hide();
         });
+        
         
     }
 
