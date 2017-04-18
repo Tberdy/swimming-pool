@@ -29,12 +29,10 @@
                 <md-tooltip md-direction="top">Nouvel événement</md-tooltip>
             </md-button>
             <md-button class="md-icon-button" aria-label="Nouvelle photo">
-                <md-icon> class="material-icons">insert_photo</md-icon>
+                <md-icon class="material-icons">image</md-icon>
                 <md-tooltip md-direction="top">Nouvelle photo</md-tooltip>
             </md-button>
         </div>
-        {{vm.user.data.id}}
-        {{vm.id_user}}
         <md-card ng-repeat="content in vm.profileContents">
             <img ng-if="content.type === 'picture'" ng-src="{{content.file}}" class="md-card-image">
             <md-card-content>
