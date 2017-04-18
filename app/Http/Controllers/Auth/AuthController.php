@@ -51,6 +51,7 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->gender = intval($request->gender);
         $user->birthdate = date( "Y-m-d", strtotime($request->birthdate));
+        $user->img = 'img/default-user.png';
         $user->save();
 
         $token = JWTAuth::fromUser($user);

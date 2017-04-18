@@ -34,6 +34,8 @@ Route::post('user/update', 'UserController@update');
 Route::post('user/delete', 'UserController@delete');
 
 Route::get('user/friends/list', 'UserController@listFriends');
+Route::get('user/friends/requests/list', 'UserController@listRequests');
+Route::get('user/friends/invitations/list', 'UserController@listInvitations');
 Route::get('user/friends/add', 'UserController@addFriend');
 Route::get('user/friends/confirm', 'UserController@confirmFriend');
 Route::post('user/friends/delete', 'UserController@deleteFriend');

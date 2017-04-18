@@ -14,23 +14,41 @@
             </md-card-content>
         </md-card>
     </div>
-    
+
     <div class="profile-content">
         <div layout="column">
             <div><img ng-src="{{vm.profile.ppLink}}"></div>
         </div>
+        <div layout="row" ng-if="vm.ownProfile">
+            <md-button class="md-icon-button" aria-label="Nouveau post">
+                <md-icon class="material-icons">create</md-icon>
+                <md-tooltip md-direction="top">Nouveau post</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Nouvel événement">
+                <md-icon class="material-icons">event</md-icon>
+                <md-tooltip md-direction="top">Nouvel événement</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Nouvelle photo">
+                <md-icon> class="material-icons">insert_photo</md-icon>
+                <md-tooltip md-direction="top">Nouvelle photo</md-tooltip>
+            </md-button>
+        </div>
+        {{vm.user.data.id}}
+        {{vm.id_user}}
         <md-card ng-repeat="content in vm.profileContents">
-            <img ng-if="content.type === 3" ng-src="{{content.file}}" class="md-card-image">
+            <img ng-if="content.type === 'picture'" ng-src="{{content.file}}" class="md-card-image">
             <md-card-content>
-                <p ng-if="content.type === 2">{{content.date}}</p>
+                <p ng-if="content.type === 'event'">{{content.date}}</p>
                 <p>{{content.text}}</p>
             </md-card-content>
             <md-card-actions layout="row" layout-align="Like">
                 <md-button class="md-icon-button" aria-label="Favorite">
-                    <i class="material-icons">favorite</i>
+                    <md-icon class="material-icons">favorite</md-icon>
+                    <md-tooltip md-direction="top">Réagir</md-tooltip>
                 </md-button>
                 <md-button class="md-icon-button" aria-label="Comment">
-                    <i class="material-icons">insert_comment</i>
+                    <md-icon class="material-icons">insert_comment</md-icon>
+                    <md-tooltip md-direction="top">Commenter</md-tooltip>
                 </md-button>
             </md-card-actions>
         </md-card>
