@@ -48,8 +48,54 @@ class UserController extends Controller {
 
     public function listFriends(Request $request) {
         $user = User::find($request->id);
-        $friends = $user->friendsIAdded()->get();
+        $friends = array();
+        $friendsIAdded = $user->friendsIAdded()->get();
+        $friendsWhoAddMe = $user->friendsWhoAddMe()->get();
+        
+        foreach ($friendsIAdded as $fr1) {
+            foreach ($friendsWhoAddMe as $fr2) {
+                if ($fr1->id == $fr2->id) {
+                    $friends[] = $fr1;
+                    break;
+                }
+            }
+        }
+        
         return response()->success(compact('friends'));
+    }
+    
+    public function listRequests(Request $request) {
+        $user = User::find($request->id);
+        $fRequests = $user->friendsIAdded()->get();
+        $friendsWhoAddMe = $user->friendsWhoAddMe()->get();
+        
+        foreach ($fRequests as $key => $fr1) {
+            foreach ($friendsWhoAddMe as $fr2) {
+                if ($fr1->id == $fr2->id) {
+                    unset($fRequests[$key]);
+                    break;
+                }
+            }
+        }
+        
+        return response()->success(compact('fRequests'));
+    }
+    
+    public function listInvitations(Request $request) {
+        $user = User::find($request->id);
+        $friendsIAdded = $user->friendsIAdded()->get();
+        $fInvitations = $user->friendsWhoAddMe()->get();
+        
+        foreach ($fInvitations as $key => $fr1) {
+            foreach ($friendsIAdded as $fr2) {
+                if ($fr1->id == $fr2->id) {
+                    unset($fInvitations[$key]);
+                    break;
+                }
+            }
+        }
+        
+        return response()->success(compact('fInvitations'));
     }
 
     public function addFriend(Request $request) {

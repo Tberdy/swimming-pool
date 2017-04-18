@@ -8,6 +8,7 @@ class ProfilePresController {
 
         this.profile = {};
         this.profileContents = [];
+        this.ownProfile = false;
     }
 
     $onInit() {
@@ -27,6 +28,8 @@ class ProfilePresController {
         }).then((response) => {
             this.profile = angular.copy(response.data.user);
             this.profile.ppLink = this.profile.ppLink || 'img/default-user.png';
+            
+            this.checkOwnProfile();
         });
     }
 
@@ -37,6 +40,15 @@ class ProfilePresController {
         }).then((response) => {
             this.profileContents = angular.copy(response.data.contents);
         });
+    }
+    
+    checkOwnProfile() {
+        console.log(this.user.data.id);
+        console.log(this.id_user);
+        if (this.user.data.id == this.id_user) {
+            this.ownProfile = true;
+            console.log('yo');
+        }
     }
 }
 
