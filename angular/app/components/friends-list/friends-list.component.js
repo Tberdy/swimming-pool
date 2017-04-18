@@ -1,4 +1,5 @@
 import {FriendSelectionController} from '../../../dialogs/friendSelection/friendSelection.dialog.js';
+import {FriendsDeleteConfirmController} from '../../../dialogs/friendsDeleteConfirm/friendsDeleteConfirm.dialog.js';
 
 class FriendsListController {
     constructor(DialogService, API, CurrentUserService,FriendsQueryService) {
@@ -7,19 +8,37 @@ class FriendsListController {
         this.API = API;
         this.user = CurrentUserService;
         this.FriendsQuery= FriendsQueryService;
+        this.message="";
+        this.currentFriends=[];
+        this.emptyQuery=true;
+    }
+    display(user)
+    {
+        return user.name;
+    }
+    querySearch(query) {
+        if (query != "")
+        {
+            this.emptyQuery=false;
+            var results = [];
+            var re = query + "+";
+            var regex = new RegExp(re, "i");
+            for (var k in this.currentFriends) {
+                if (regex.test(this.display(this.currentFriends[k])))
+                {
+                    results.push(this.currentFriends[k]);
+                }
+            }
+            return results;
+        }
+        this.emptyQuery=true;
+        return this.currentFriends;
+
     }
     getFriends() {
         return this.FriendsQuery.getFriends(this.user.data.id);
     }
-    /*
-    deleteFriends(){
-        this.API.all('user/friends/delete').post('',{
-         
-         id:user_id,
-         friend_id:friend_id
-     })
-    }
-    */
+    
     addFriend() {
         this.API.all('user/friends/add').get('', {
             id: this.user.data.id,
@@ -30,59 +49,52 @@ class FriendsListController {
     }
 
     $onInit() {
-        this.currentFriends=this.FriendsQuery.getFriends(this.user.data.id);
-        this.friends = [];
-        this.people = [
-            {name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
-            {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
-            {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
+        
+        //Template
+        this.currentFriends = [
+            {id:1,name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
+            {id:2,name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
+            {id:3,name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
         ];
         /*
-         angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
-         .config(function ($mdIconProvider) {
-         $mdIconProvider
-         .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
-         .iconSet('device', 'img/icons/sets/device-icons.svg', 24)
-         .iconSet('communication', 'img/icons/sets/communication-icons.svg', 24)
-         .defaultIconSet('img/icons/sets/core-icons.svg', 24);
-         })
+         * this.currentFriends=this.FriendsQuery.getFriends(this.user.data.id);
+         * for(var k in this.currentFriends)
+         * {
+         *  this.currentFriends[k].selected=false;
+         * }
          */
+        
     }
 
-    doSecondaryAction(event) {
-        this.Dialog.show(
-                this.Dialog.alert()
-                .title('Secondary Action')
-                .textContent('Secondary actions can be used for one click actions')
-                .ariaLabel('Secondary click demo')
-                .ok('Neat!')
-                .targetEvent(event)
-                );
-    }
-
-    navigateTo(to, event) {
-        this.Dialog.show(
-                this.Dialog.alert()
-                .title('Navigating')
-                .textContent('Imagine being taken to ' + to)
-                .ariaLabel('Navigation demo')
-                .ok('Neat!')
-                .targetEvent(event)
-                );
-    }
-
-    doPrimaryAction(event) {
-        this.Dialog.show(
-                this.Dialog.alert()
-                .title('Primary Action')
-                .textContent('Primary actions can be used for one click actions')
-                .ariaLabel('Primary click demo')
-                .ok('Awesome!')
-                .targetEvent(event)
-                );
-    }
     deleteSelection()
     {
+        //Load the selected friends
+        var newTab = [];
+        this.message="";
+        for(var k in this.currentFriends)
+        {
+            if(this.currentFriends[k].selected)
+            {
+                newTab.push(this.currentFriends[k]);
+                
+            }
+        }
+        if(newTab.length == 0)
+        {
+            this.message="Vous n'avez sélectionné personne !";
+            return;
+        }
+        let options = {
+            controller: FriendsDeleteConfirmController,
+            controllerAs: 'vm',
+            locals:
+                    {
+                        parent: this,
+                        selectedTab: newTab
+                    }
+        }
+        
+        this.Dialog.fromTemplate('friendsDeleteConfirm', options);
         //return this.Dialog.fromTemplate('confirmDelete');
     }
     friendsSelection()
@@ -92,11 +104,15 @@ class FriendsListController {
             controllerAs: 'vm',
             locals:
                     {
-                        parent: this,
+                        parent: this
                     }
         }
         this.Dialog.fromTemplate('friendSelection', options);
         //alert(a);
+    }
+    goToProfil(person,event)
+    {
+        //dialog of mini profil
     }
 }
 

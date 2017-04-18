@@ -1,3 +1,4 @@
+import {FriendsInvitationComponent} from './app/components/friends-invitation/friends-invitation.component';
 import {ProfilePresComponent} from './app/components/profile-pres/profile-pres.component';
 import {FriendsRequestComponent} from './app/components/friends-request/friends-request.component';
 import {FriendsListComponent} from './app/components/friends-list/friends-list.component';
@@ -10,6 +11,7 @@ import {LoginFormComponent} from './app/components/login-form/login-form.compone
 import {RegisterFormComponent} from './app/components/register-form/register-form.component';
 
 angular.module('app.components')
+	.component('friendsInvitation', FriendsInvitationComponent)
 	.component('profilePres', ProfilePresComponent)
 	.component('friendsRequest', FriendsRequestComponent)
 	.component('friendsList', FriendsListComponent)
