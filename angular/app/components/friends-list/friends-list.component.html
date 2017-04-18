@@ -2,7 +2,7 @@
     <md-subheader class="md-no-sticky">Mes amis</md-subheader>
     <md-list-item >
         <table style="width:100%">
-            <tr ng-repeat="person in vm.people" class = "friends-box" ng-click="vm.goToPerson(person.name, $event)">
+            <tr ng-repeat="person in vm.currentFriends" class = "friends-box" ng-click="vm.goToProfil(person, $event)">
                 <th><img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
                 <th>{{ person.name}}</th> 
                 <!--<th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i></th>!-->
@@ -11,9 +11,56 @@
             </tr>
         </table>
     </md-list-item>
+    <div ng-submit="$event.preventDefault()">{{vm.message}}</div>
     <br/>
     <div>
         <md-button class="md-raised md-primary" ng-click="vm.friendsSelection()">Ajouter un ami</md-button>
         <md-button class="md-raised md-warn" ng-click="vm.deleteSelection()">Supprimer la selection</md-button>
     </div>
 </md-list>
+<!--
+<md-list ng-cloak="" class="listdemoListControls friends-background">    
+    <md-subheader class="md-no-sticky">Mes amis</md-subheader>
+    <div layout="column" ng-cloak>
+        <md-content class="md-padding">
+            <form ng-submit="$event.preventDefault()">
+                <md-autocomplete
+                    md-selected-item="vm.selectedItem"
+                    md-search-text-change="vm.searchTextChange(vm.searchText)"
+                    md-search-text="vm.searchText"
+                    md-items="person in vm.querySearch(vm.searchText)"
+                    md-item-text="vm.display(item)"
+                    md-min-length="0"
+                    placeholder="Rechercher un ami...">
+                    <md-item-template ng-if="!vm.emptyQuery">
+                        <table style="width:100%">
+                            <tr class = "friends-box" ng-click="vm.goToProfil(person, $event)">
+                                <th><img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
+                                <th md-highlight-text="vm.searchText" md-highlight-flags="^i">{{ person.name}}</th> 
+                                <th><i class="material-icons friends-list-icon" ng-click="">message</i></th>
+                                <th class="friends-checkbox"><md-checkbox  ng-model="person.selected"></md-checkbox></th>
+                            </tr>
+                        </table>
+                    </md-item-template>
+                    <md-not-found>
+                        Aucun utilisateur ne correspond à "{{vm.searchText}}".
+                    </md-not-found>
+
+                </md-autocomplete>
+                <table style="width:100%" ng-if="vm.emptyQuery" >
+                    <tr ng-repeat="person in vm.currentFriends" class = "friends-box" ng-click="vm.goToProfil(person, $event)">
+                        <th><img alt="{{ person.name}}" ng-src="{{ person.img}}" class="md-avatar"></th>
+                        <th>{{ person.name}}</th> 
+                        <th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i></th>
+                        <th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">message</i></th>
+                        <th class="friends-checkbox"><md-checkbox  ng-model="person.selected"></md-checkbox></th>
+                    </tr>
+                </table>
+                <br/>
+            </form>
+        </md-content>
+    </div>
+</md-list>
+
+!-->
+

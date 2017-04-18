@@ -22,12 +22,11 @@ export class FriendSelectionController {
 
     }
     save() {
-        console.log('save');
+        this.message="";
         //Valid select item
         if (this.selectedItem === null)
         {
-            console.log('undefined');
-            this.message = "undefined";
+            this.message = "L\'utilisateur n\'éxiste pas";
             return;
         }
         //Already friend or invitation sent
@@ -36,8 +35,7 @@ export class FriendSelectionController {
         {
             if (friendsList[i].id === this.selectedItem.id)
             {
-                console.log('already');
-                this.message = "already";
+                this.message = "Vous avez déjà envoyé un requête à cette personne !";
                 return;
             }
         }
@@ -47,7 +45,6 @@ export class FriendSelectionController {
     }
 
     cancel() {
-        //alert('Cancel Button Pressed');
         this.Dialog.cancel();
     }
     //Load of all the users

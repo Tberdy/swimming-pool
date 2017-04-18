@@ -1,9 +1,9 @@
-export class FriendsQueryService{
-    constructor(API){
+export class FriendsQueryService {
+    constructor(API) {
         'ngInject';
-        
-        this.API=API;        
-        
+
+        this.API = API;
+
     }
     /*
      * {
@@ -20,13 +20,13 @@ export class FriendsQueryService{
      *      "pivot":{
      *          "id_from":1,
      *          "id_to":5
-                    }
-                }]
-            }
-    }
+     }
+     }]
+     }
+     }
      */
     getFriends(userId) {
-        
+
         return this.API.all('user/friends/list').get('', {
             id: userId
         }).then((response) => {
@@ -34,7 +34,7 @@ export class FriendsQueryService{
             return response.data.friends;
         });
     }
-    
+
     addFriends(friendId)
     {
         return this.API.all('user/friends/add').get('', {
@@ -44,6 +44,15 @@ export class FriendsQueryService{
             angular.copy(response.data.friends);
             return response.data.friends;
         });
+    }
+    deleteFriend(friendId, userId)
+    {
+        this.API.all('user/friends/delete').post('', {
+
+            id: userId,
+            friend_id: friendId
+        })
+
     }
 }
 
