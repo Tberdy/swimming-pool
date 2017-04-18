@@ -33,7 +33,7 @@ export class FriendsQueryService {
     }
     getRequestsPromise(userId)
     {
-        return this.API.all('user/friends/invitations/list').get('', {
+        return this.API.all('user/friends/requests/list').get('', {
             id: userId
         })
     }

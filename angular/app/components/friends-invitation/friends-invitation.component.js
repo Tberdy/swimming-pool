@@ -13,7 +13,7 @@ class FriendsInvitationController {
         let promiseUser = this.CurrentUser.getUserPromise();
         promiseUser.then((response) => {
             this.user = angular.copy(response);
-            let promiseFriends = this.FriendsQuery.getgetFriendsPromise(this.user.id);
+            let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
             promiseFriends.then((response) => {
                 this.friendsList = angular.copy(response.data.friends);
             });

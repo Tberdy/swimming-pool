@@ -6,11 +6,12 @@ class FriendsListController {
         'ngInject';
         this.Dialog = DialogService;
         this.API = API;
-        this.user = CurrentUserService;
+        this.CurrentUser = CurrentUserService;
         this.FriendsQuery= FriendsQueryService;
         this.message="";
-        this.currentFriends=[];
         this.emptyQuery=true;
+        this.user=null;
+        this.friendsInvitation=null;
     }
     
     $onInit() {
@@ -19,7 +20,7 @@ class FriendsListController {
             this.user = angular.copy(response);
             let promiseFriends = this.FriendsQuery.getInvitationsPromise(this.user.id);
             promiseFriends.then((response) => {
-                this.friendsInvitation = angular.copy(response.data.friends);
+                this.friendsInvitation = angular.copy(response.data.fInvitations);
             });
         });
         /*

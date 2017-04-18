@@ -1,7 +1,11 @@
 class FriendsRequestController{
-    constructor(DialogService) {
+    constructor(DialogService,CurrentUserService,FriendsQueryService) {
         'ngInject';
         this.Dialog = DialogService;
+        this.CurrentUser = CurrentUserService;
+        this.FriendsQuery= FriendsQueryService;
+        this.user=null;
+        this.friendsRequest=null;
     }
 
     $onInit() {
@@ -10,7 +14,7 @@ class FriendsRequestController{
             this.user = angular.copy(response);
             let promiseFriends = this.FriendsQuery.getRequestsPromise(this.user.id);
             promiseFriends.then((response) => {
-                this.friendsRequest = angular.copy(response.data.friends);
+                this.friendsRequest = angular.copy(response.data.fRequests);
             });
         });
         /*
