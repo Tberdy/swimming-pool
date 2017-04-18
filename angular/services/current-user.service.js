@@ -17,8 +17,6 @@ export class CurrentUserService {
                 getUser: this.retrieveUser()
             };
         }
-
-
     }
     retrieveUser() {
         return this.API.all('user').get('')
@@ -26,6 +24,9 @@ export class CurrentUserService {
                     this.data = angular.copy(response);
                     return response;
                 });
+    }
+    getUserPromise() {
+        return this.API.all('user').get('');
     }
     
     getAllUsers()

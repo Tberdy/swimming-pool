@@ -14,25 +14,25 @@ class ContentController extends Controller {
     }
 
     public function listAll(Request $request) {
-        $user = User::find($request->id);
+        $user = User::find($request->user_id);
         $contents = $user->contents()->get();
         return response()->success(compact('contents'));
     }
 
     public function listPosts(Request $request) {
-        $user = User::find($request->id);
+        $user = User::find($request->user_id);
         $posts = $user->contents()->where('type', 'post')->get();
         return response()->success(compact('posts'));
     }
 
     public function listEvents(Request $request) {
-        $user = User::find($request->id);
+        $user = User::find($request->user_id);
         $events = $user->contents()->where('type', 'event')->get();
         return response()->success(compact('events'));
     }
 
     public function listPictures(Request $request) {
-        $user = User::find($request->id);
+        $user = User::find($request->user_id);
         $pictures = $user->contents()->where('type', 'picture')->get();
         return response()->success(compact('pictures'));
     }

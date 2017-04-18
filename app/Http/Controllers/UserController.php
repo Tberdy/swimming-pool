@@ -8,7 +8,7 @@ use App\User as User;
 class UserController extends Controller {
 
     public function get(Request $request) {
-        $user = User::find($request->id);
+        $user = User::find($request->user_id);
         return response()->success(compact('user'));
     }
 
