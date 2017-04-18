@@ -37,3 +37,19 @@ Route::get('user/friends/list', 'UserController@listFriends');
 Route::get('user/friends/add', 'UserController@addFriend');
 Route::get('user/friends/confirm', 'UserController@confirmFriend');
 Route::post('user/friends/delete', 'UserController@deleteFriend');
+
+Route::get('content/get', 'ContentController@get');
+Route::get('content/list', 'ContentController@listAll');
+Route::get('content/list/posts', 'ContentController@listPosts');
+Route::get('content/list/events', 'ContentController@listEvents');
+Route::get('content/list/pictures', 'ContentController@listPictures');
+Route::get('content/list/posts', 'ContentController@listPosts');
+Route::post('content/add/post', 'ContentController@addPost');
+Route::post('content/add/event', 'ContentController@addEvent');
+Route::post('content/add/picture', 'ContentController@addFile');
+Route::post('content/delete', 'ContentController@delete');
+
+Route::get('comment/get', 'CommentController@get');
+Route::get('comment/list', 'CommentController@listPerContent');
+Route::post('comment/add', 'CommentController@add');
+Route::post('comment/delete', 'CommentController@delete');
