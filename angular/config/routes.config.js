@@ -69,6 +69,9 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
             })
             .state('app.news', {
                 url: '/news',
+                data: {
+                    auth: true
+                },
                 views: {
                     'main@': {
                         templateUrl: getView('news')
