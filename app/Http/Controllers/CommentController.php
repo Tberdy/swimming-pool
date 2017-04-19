@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User as User;
 use App\Content as Content;
 use App\Comment as Comment;
 
@@ -15,8 +16,14 @@ class CommentController extends Controller
     
     public function listPerContent(Request $request) {
         $content = Content::find($request->content_id);
-        $comment = $content->comments()->get();
-        return response()->success(compact('comment'));
+        $comments = $content->comments()->get();
+        return response()->success(compact('comments'));
+    }
+    
+    public function listPerUser(Request $request) {
+        $user = User::find($request->user_id);
+        $comments = $user->comments()->get();
+        return response()->success(compact('comments'));
     }
     
     public function add(Request $request) {

@@ -8,6 +8,7 @@ class ProfilePresController {
 
         this.profile = {};
         this.profileContents = [];
+        this.profileComments = {};
 
         this.ownProfile = false;
         this.createPost = false;
@@ -44,17 +45,18 @@ class ProfilePresController {
             user_id: this.id_user
         }).then((response) => {
             this.profileContents = angular.copy(response.data.contents);
-            
+            angular.forEach(this.profileContents, function(value, key) {
+                this.getCommentsFor(value.id);
+            }.bind(this));
         });
     }
     
     getCommentsFor(content_id) {
-        this.API.all('comment/list').get('', {
+        this.API.all('comments/list').get('', {
             id: this.user.data.id,
             content_id: content_id
         }).then((response) => {
-            this.profileContents = angular.copy(response.data.contents);
-            
+            this.profileComments[content_id] = angular.copy(response.data.comments);
         });
     } 
 

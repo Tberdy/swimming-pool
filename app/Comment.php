@@ -11,10 +11,10 @@ class Comment extends Model
     public $timestamps = true;
     
     public function user() {
-        $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
     
     public function content() {
-        $this->belongsTo('App\Content');
+        return $this->belongsTo('App\Content');
     }
 }
