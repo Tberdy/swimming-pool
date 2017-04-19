@@ -67,6 +67,14 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
                     }
                 }
             })
+            .state('app.news', {
+                url: '/news',
+                views: {
+                    'main@': {
+                        templateUrl: getView('news')
+                    }
+                }
+            })
             .state('app.friends', {
                 url: '/friends',
                 data: {
