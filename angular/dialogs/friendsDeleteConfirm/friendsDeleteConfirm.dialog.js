@@ -19,7 +19,7 @@ export class FriendsDeleteConfirmController {
         });
     }
     save() {
-        //Delete is confirm
+        //Delete is confirmed
         //Take the list of selected friends
         for (var k in this.selectedTab)
         {
@@ -28,7 +28,7 @@ export class FriendsDeleteConfirmController {
 
         }
         this.FriendsQuery.addToast("Vous avez supprimé " + this.selectedTab.length + " ami(s).");
-        this.$state.go('app.friends');
+        this.$state.reload();
         this.DialogService.hide();
         
     }

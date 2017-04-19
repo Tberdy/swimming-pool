@@ -17,7 +17,6 @@ class FriendsInvitationController {
             let promiseFriends = this.FriendsQuery.getInvitationsPromise(this.user.id);
             promiseFriends.then((response) => {
                 this.friendsInvitation = angular.copy(response.data.fInvitations);
-                console.log(this.friendsInvitation);
             });
         });
 
@@ -28,7 +27,7 @@ class FriendsInvitationController {
         promise.then((response) => {
             //refresh
             this.FriendsQuery.addToast("Invitation acceptée !");
-            this.$state.go('app.friends');
+            this.$state.reload();
         });
     }
     refuseFriend(friendId)
@@ -37,7 +36,7 @@ class FriendsInvitationController {
         promise.then((response) => {
             //refresh
             this.FriendsQuery.addToast("Invitation refusée.");
-            this.$state.go('app.friends');
+            this.$state.reload();
         });
     }
 }

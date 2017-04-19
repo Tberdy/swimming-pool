@@ -25,15 +25,12 @@ class FriendsListController {
                 this.currentFriends = angular.copy(response.data.friends);
             });
         });
-        this.toast.show("bite");
         this.displayToasts();
     }
     displayToasts(){
-        console.log("wesh");
         while(this.FriendsQuery.waitingToasts.length>0)
         {
             var a=this.FriendsQuery.waitingToasts.shift();
-            console.log("toast : " + a);
             this.toast.show(a);
         }
     }
