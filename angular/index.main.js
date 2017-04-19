@@ -1,3 +1,5 @@
+Dropzone.autoDiscover = false;
+
 import './index.modules';
 
 import './index.run';

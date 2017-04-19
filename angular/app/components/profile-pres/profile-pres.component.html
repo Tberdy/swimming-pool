@@ -47,10 +47,7 @@
                 </md-input-container>
             </div>
             <div ng-if="vm.createFile">
-                <md-input-container>
-                    <label>Texte</label>
-                    <input type="text" ng-model="vm.yolo">
-                </md-input-container>
+                <ng-dropzone class="dropzone" options="vm.dzOptions" callbacks="vm.dzCallbacks" methods="vm.dzMethods"></ng-dropzone>
             </div>
         </div>
 
@@ -70,9 +67,9 @@
                     <md-tooltip md-direction="top">Commenter</md-tooltip>
                 </md-button>
             </md-card-actions>
-            <md-card ng-repeat="">
+            <md-card ng-repeat="comment in vm.profileComments[content.id]">
                 <md-card-content>
-                    <p>Yolo</p>
+                    <p>{{comment.text}}</p>
                 </md-card-content>
             </md-card>
         </md-card>

@@ -8,12 +8,22 @@ class ProfilePresController {
 
         this.profile = {};
         this.profileContents = [];
+        this.profileComments = {};
 
         this.ownProfile = false;
         this.createPost = false;
         this.createEvent = false;
         this.createFile = false;
-
+        
+        this.dzOptions = {
+		url : '/api/content/add/file',
+                params : {
+                    id: null
+                },
+		maxFilesize : '10',
+		addRemoveLinks : false,
+                maxFiles: 1
+	};
     }
 
     $onInit() {
@@ -27,13 +37,14 @@ class ProfilePresController {
     }
 
     getProfile() {
-        console.log();
         this.API.all('user/get').get('', {
             user_id: this.id_user
         }).then((response) => {
             this.profile = angular.copy(response.data.user);
             this.profile.ppLink = this.profile.ppLink || 'img/default-user.png';
-
+            
+            this.dzOptions.params.id = this.user.data.id;
+            
             this.checkOwnProfile();
         });
     }
@@ -44,17 +55,18 @@ class ProfilePresController {
             user_id: this.id_user
         }).then((response) => {
             this.profileContents = angular.copy(response.data.contents);
-            
+            angular.forEach(this.profileContents, function(value, key) {
+                this.getCommentsFor(value.id);
+            }.bind(this));
         });
     }
     
     getCommentsFor(content_id) {
-        this.API.all('comment/list').get('', {
+        this.API.all('comments/list').get('', {
             id: this.user.data.id,
             content_id: content_id
         }).then((response) => {
-            this.profileContents = angular.copy(response.data.contents);
-            
+            this.profileComments[content_id] = angular.copy(response.data.comments);
         });
     } 
 
@@ -68,6 +80,7 @@ class ProfilePresController {
         this.createPost = false;
         this.createEvent = false;
         this.createFile = false;
+        this.createComment = false;
 
         if (state) {
             switch (target) {
@@ -80,9 +93,11 @@ class ProfilePresController {
                 case 'file':
                     this.createFile = true;
                     break;
+                case 'comment':
+                    this.createComment = true;
+                    break;
             }
         }
-
     }
 }
 

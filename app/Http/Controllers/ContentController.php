@@ -57,11 +57,20 @@ class ContentController extends Controller {
     }
 
     public function addFile(Request $request) {
+        $id = $request->id;
+        
+        $file = $request->file('file');
+        $extension = $file->getClientOriginalExtension();
+        $originalFilename = $file->getClientOriginalName();
+        $filename = uniqid($id . '-') . '.' . $extension;
+        $path = 'storage' . DIRECTORY_SEPARATOR . $id;
+        $file->move($path, $filename);   
+        
         $content = new Content;
-        $content->user_id = $request->id;
+        $content->user_id = $id;
         $content->type = 'file';
-        $content->text = trim($request->data->text);
-        $content->file = '';
+        $content->text = $originalFilename;
+        $content->file = $path . DIRECTORY_SEPARATOR . $filename;
         $content->save();
         return response()->success(array());
     }
