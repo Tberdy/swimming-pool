@@ -1,13 +1,14 @@
 .Header-logo {
   width: 216px;
   height: 64px;
-  //padding-top: 10px;
-  //padding-bottom : 10px
+  padding-top: 1em;
 }
 .Header {
   
   background-color: white;
   position: absolute;
+  max-height: 10vh;
+  overflow:hidden;
   top: 0;
   left: 0;
   right: 0;

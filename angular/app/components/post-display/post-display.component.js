@@ -8,12 +8,19 @@ class PostDisplayController {
         this.ContentQuery = ContentQueryService;
         this.user = null;
         this.currentFriends = null;
-        this.postData = [
+        this.done = false;
+        this.friendsLoaded = false;
+        //var cpts = 0;
+        this.data=[];
+        /*
+        this.data = [
             {
                 user: null,
-                data: null
+                content: null
             }
         ];
+        */
+        this.content = [];
         //this.postData = null;
     }
     $onInit()
@@ -24,64 +31,94 @@ class PostDisplayController {
             let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
             promiseFriends.then((response) => {
                 this.currentFriends = angular.copy(response.data.friends);
+                this.friendsLoaded = true;
                 for (var k = 0; k < this.currentFriends.length; k++)
                 {
                     let promise = this.ContentQuery.getPostsPromise(this.currentFriends[k].id);
                     promise.then((response) => {
+
+                        this.cpts++;
                         if (angular.copy(response.data.posts) !== null)
                         {
-                            this.postData.push({
-                                user: this.currentFriends[k],
-                                data: angular.copy(response.data.posts)
-                            });
+                            this.content.push(angular.copy(response.data.posts));
+                            this.associate();
+                            this.sortPosts();
+
                         }
 
                     });
                     let promisePic = this.ContentQuery.getPicturesPromise(this.currentFriends[k].id);
                     promisePic.then((response) => {
+                        this.cpts++;
                         if (angular.copy(response.data.pictures) !== null)
                         {
-                            this.postData.push({
-                                user: this.currentFriends[k],
-                                data: angular.copy(response.data.pictures)
-                            });
+                            this.content.push(angular.copy(response.data.pictures));
+                            this.associate();
+                            this.sortPosts();
                         }
-
                     });
-
                 }
-                this.sortPosts();
-                console.log(this.postData);
+
             });
         });
     }
+    /*
+     isDone()
+     {
+     if(this.done===true)return true;
+     if(this.friendsLoaded && this.currentFriends.length == 2*this.cpts)
+     {
+     this.done=true;
+     }
+     return this.done;
+     }
+     */
+    associate()
+    {
+        if (this.content !== null && this.content.length > 0)
+        {
+            var currentContent = this.content.pop();
+            for (var i in currentContent)
+            {
+                for (var j in this.currentFriends)
+                {
+                    if (this.currentFriends[j].id === currentContent[i].user_id)
+                    {
+                        this.data.push({
+                            user: this.currentFriends[j],
+                            content: currentContent[i]
+                        });
+                    }
+                }
+            }
+
+        }
+    }
     sortPosts()
     {
-        
-        this.postData.sort(function (a, b) {
-            return Date.parse(a.data.date)-Date.parse(b.data.date);
+        this.data.sort(function (a, b) {
+            return Date.parse(a.content.date) - Date.parse(b.content.date);
         });
     }
     delay(post)
     {
-        if(post===null) return 0;
-        var diff = Date.now()-Date.parse(post.data.date);
+        if (post === null || typeof post === 'undefined')
+            return 0;
+        var diff = Date.now() - Date.parse(post.content.date);
         var date = new Date(diff);
         return date.toString();
     }
     isPicture(post)
     {
-        if(post.type=="picture") return true;
+        if (post.content.type === "picture")
+            return true;
         return false;
     }
     isText(post)
     {
-        if(post.type=="post") return true;
+        if (post.content.type === "post")
+            return true;
         return false;
-    }
-    test()
-    {
-        console.log(this.postData);
     }
 
 }

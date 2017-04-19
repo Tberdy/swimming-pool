@@ -1,5 +1,5 @@
-<md-list ng-cloak="" class="listdemoListControls friends-background">    
-    <md-subheader class="md-no-sticky">Mes amis</md-subheader>
+<md-list ng-cloak="" class="listdemoListControls main-list">    
+    <md-subheader class="md-no-sticky subheader">Mes amis</md-subheader>
     <md-list-item >
         <table layout="column" layout-align=" stretch" style="width:100%" onload="vm.checkFriends();">
             <tr layout="row"  layout-align="space-around center" ng-repeat="person in vm.currentFriends" class = "friends-box" ng-click="vm.goToProfil(person, $event)">

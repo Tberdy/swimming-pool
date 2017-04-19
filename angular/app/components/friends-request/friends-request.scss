@@ -1,15 +1,15 @@
-.friends-background
-{
-        background: rgba(13, 162, 204, .5);
-        text-decoration: none;
-        padding: 0 !important;
-        box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.26);
-}
-        
+       
 .friends-background > .md-subheader
 {
         text-align: center;
         background: rgba(255, 255, 255, 0.7);
 }
+.subheader
+{
+    border-radius: 1em 1em 0 0;
+}
 
-
+.main-list
+{
+        padding: 0!important;
+}
