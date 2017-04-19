@@ -62,17 +62,6 @@ class PostDisplayController {
             });
         });
     }
-    /*
-     isDone()
-     {
-     if(this.done===true)return true;
-     if(this.friendsLoaded && this.currentFriends.length == 2*this.cpts)
-     {
-     this.done=true;
-     }
-     return this.done;
-     }
-     */
     associate()
     {
         if (this.content !== null && this.content.length > 0)
@@ -97,7 +86,7 @@ class PostDisplayController {
     sortPosts()
     {
         this.data.sort(function (a, b) {
-            return Date.parse(a.content.date) - Date.parse(b.content.date);
+            return Date.parse(b.content.date) - Date.parse(a.content.date);
         });
     }
     delay(post)
@@ -105,8 +94,27 @@ class PostDisplayController {
         if (post === null || typeof post === 'undefined')
             return 0;
         var diff = Date.now() - Date.parse(post.content.date);
-        var date = new Date(diff);
-        return date.toString();
+        
+        var sec=parseInt(diff/1000);
+        var min=parseInt(sec/60);
+        var hour=parseInt(min/60);
+        var day=parseInt(hour/24);
+        var week=parseInt(day/7);
+        var month=parseInt(day/31);
+        var year=parseInt(month/12);
+        if(year>1) return "Il y a " + year + " ans.";
+        if(year==1) return "Il y a " + year + " an.";
+        if(month>=2) return "Il y a " + month + " mois.";
+        if(week>1) return "Il y a " + week + " semaines.";
+        if(week==1) return "Il y a " + week + " semaine.";
+        if(day>1) return "Il y a " + day + " jours.";
+        if(day==1) return "Il y a " + day + " jour.";
+        if(hour>1) return "Il y a " + hour + " heures.";
+        if(hour==1) return "Il y a " + hour + " heure.";
+        if(min>1) return "Il y a " + min + " minutes.";
+        if(min==1) return "Il y a " + min + " minute.";
+        if(sec>20) return "Il y a " + sec + " secondes.";
+        return "À l'instant.";
     }
     isPicture(post)
     {
@@ -119,6 +127,10 @@ class PostDisplayController {
         if (post.content.type === "post")
             return true;
         return false;
+    }
+    test()
+    {
+        console.log(this.data);
     }
 
 }
