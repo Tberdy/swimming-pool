@@ -9,25 +9,35 @@
 }
 .friends-checkbox
 {
-    padding-left: 40px;
+    padding: 0!important;
 }
 .friends-checkbox > md-checkbox
 {
     top: 110% !important;
 }
+.box-message
+{
+    text-align: center;
+    padding: 1em !important;
+}
+.freveal-color-button
+{
+    
+    background-color: #0096A6!important;
+}
 .friends-background
 {
-        background: rgba(13, 162, 204, .5);
-        text-decoration: none;
-        padding: 0 !important;
-        box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.26);
-        height: 40em;
+    background: rgba(13, 162, 204, .5);
+    text-decoration: none;
+    padding: 0 !important;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.26);
+    height: 40em;
 }
-        
+
 .friends-background > .md-subheader
 {
-        text-align: center;
-        background: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
 }
 
 
