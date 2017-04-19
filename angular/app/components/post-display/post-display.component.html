@@ -1,0 +1,31 @@
+<md-subheader class="md-no-sticky">Fil d'actualité</md-subheader>
+<md-content>
+    <div layout="column" class="post-content">
+      <md-card ng-repeat="post in vm.postData">
+        <md-card-header>
+          <md-card-avatar>
+            <md-icon class="md-avatar-icon" md-svg-icon="{{post.user.img}}"></md-icon>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{post.user.firstname}} {{post.user.name}}</span>
+            <span class="md-subhead">{{vm.delay(post)}}</span>
+          </md-card-header-text>
+        </md-card-header>
+        <img ng-if="vm.isPicture(post)" ng-src="{{post.img}}" class="md-card-image">
+        
+        <md-card-content ng-if="vm.isText(post)">
+          <p>
+            {{post.text}}
+          </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="start center">
+          <md-button>J'aime</md-button>
+          <md-button>J'adore</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+</md-content>
+<!--
+<div ng-repeat="data in vm.postData">{{data}}</div>
+<div ng-click="vm.test()">test</div>
+!-->
