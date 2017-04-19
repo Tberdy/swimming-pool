@@ -47,7 +47,7 @@ Route::get('content/list/events', 'ContentController@listEvents');
 Route::get('content/list/pictures', 'ContentController@listPictures');
 Route::post('content/add/post', 'ContentController@addPost');
 Route::post('content/add/event', 'ContentController@addEvent');
-Route::post('content/add/picture', 'ContentController@addFile');
+Route::post('content/add/file', 'ContentController@addFile');
 Route::post('content/delete', 'ContentController@delete');
 
 Route::get('comment/get', 'CommentController@get');

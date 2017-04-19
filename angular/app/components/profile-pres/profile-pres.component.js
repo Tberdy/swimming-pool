@@ -14,7 +14,16 @@ class ProfilePresController {
         this.createPost = false;
         this.createEvent = false;
         this.createFile = false;
-
+        
+        this.dzOptions = {
+		url : '/api/content/add/file',
+                params : {
+                    id: null
+                },
+		maxFilesize : '10',
+		addRemoveLinks : false,
+                maxFiles: 1
+	};
     }
 
     $onInit() {
@@ -28,13 +37,14 @@ class ProfilePresController {
     }
 
     getProfile() {
-        console.log();
         this.API.all('user/get').get('', {
             user_id: this.id_user
         }).then((response) => {
             this.profile = angular.copy(response.data.user);
             this.profile.ppLink = this.profile.ppLink || 'img/default-user.png';
-
+            
+            this.dzOptions.params.id = this.user.data.id;
+            
             this.checkOwnProfile();
         });
     }
@@ -70,6 +80,7 @@ class ProfilePresController {
         this.createPost = false;
         this.createEvent = false;
         this.createFile = false;
+        this.createComment = false;
 
         if (state) {
             switch (target) {
@@ -82,9 +93,11 @@ class ProfilePresController {
                 case 'file':
                     this.createFile = true;
                     break;
+                case 'comment':
+                    this.createComment = true;
+                    break;
             }
         }
-
     }
 }
 
