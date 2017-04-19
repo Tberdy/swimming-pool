@@ -100,5 +100,16 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
                         templateUrl: getView('profile')
                     }
                 }
+            })
+            .state('app.chat', {
+                url: '/chat',
+                data: {
+                    auth: true
+                },
+                views: {
+                    'main@': {
+                        templateUrl: getView('chat')
+                    }
+                }
             });
 }
