@@ -2,7 +2,7 @@ import {FriendSelectionController} from '../../../dialogs/friendSelection/friend
 import {FriendsDeleteConfirmController} from '../../../dialogs/friendsDeleteConfirm/friendsDeleteConfirm.dialog.js';
 
 class FriendsListController {
-    constructor(DialogService, API, CurrentUserService,FriendsQueryService) {
+    constructor(DialogService, API, CurrentUserService,FriendsQueryService,ToastService) {
         'ngInject';
         this.Dialog = DialogService;
         this.API = API;
@@ -11,7 +11,9 @@ class FriendsListController {
         this.message="";
         this.emptyQuery=true;
         this.user=null;
+        this.toast=ToastService;
         this.currentFriends=null;
+        this.noFriends=true;
     }
     
     $onInit() {
@@ -23,6 +25,23 @@ class FriendsListController {
                 this.currentFriends = angular.copy(response.data.friends);
             });
         });
+        this.toast.show("bite");
+        this.displayToasts();
+    }
+    displayToasts(){
+        console.log("wesh");
+        while(this.FriendsQuery.waitingToasts.length>0)
+        {
+            var a=this.FriendsQuery.waitingToasts.shift();
+            console.log("toast : " + a);
+            this.toast.show(a);
+        }
+    }
+    checkNoFriends()
+    {
+        if(this.currentFriends===null) return true;
+        if(this.currentFriends.length <= 0)return true;
+        return false;
     }
     display(user)
     {

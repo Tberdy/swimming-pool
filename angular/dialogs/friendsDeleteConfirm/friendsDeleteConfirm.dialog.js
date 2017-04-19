@@ -27,6 +27,7 @@ export class FriendsDeleteConfirmController {
            this.FriendsQuery.deleteFriend(this.selectedTab[k].id, this.user.id);
 
         }
+        this.FriendsQuery.addToast("Vous avez supprimé " + this.selectedTab.length + " ami(s).");
         this.$state.go('app.friends');
         this.DialogService.hide();
         

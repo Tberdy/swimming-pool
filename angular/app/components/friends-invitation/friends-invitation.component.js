@@ -1,10 +1,11 @@
 class FriendsInvitationController {
-    constructor(DialogService, FriendsQueryService, CurrentUserService) {
+    constructor(DialogService, FriendsQueryService, CurrentUserService,$state) {
         'ngInject';
         this.Dialog = DialogService;
         this.FriendsQuery = FriendsQueryService;
         this.CurrentUser = CurrentUserService;
         this.user = null;
+        this.$state=$state;
         //this.friends = null;
         this.friendsInvitation = null;
     }
@@ -26,7 +27,17 @@ class FriendsInvitationController {
         let promise = this.FriendsQuery.addFriendsPromise(this.user.id, friendId)
         promise.then((response) => {
             //refresh
-            console.log("Friend added");
+            this.FriendsQuery.addToast("Invitation acceptée !");
+            this.$state.go('app.friends');
+        });
+    }
+    refuseFriend(friendId)
+    {
+        let promise = this.FriendsQuery.refuseFriendsPromise(this.user.id, friendId)
+        promise.then((response) => {
+            //refresh
+            this.FriendsQuery.addToast("Invitation refusée.");
+            this.$state.go('app.friends');
         });
     }
 }

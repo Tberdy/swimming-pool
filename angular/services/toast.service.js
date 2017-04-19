@@ -22,7 +22,7 @@ export class ToastService {
 			.hideDelay(this.delay)
 		);
 	}
-
+        
 	error(content) {
 		if (!content) {
 			return false;

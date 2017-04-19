@@ -3,6 +3,7 @@ export class FriendsQueryService {
         'ngInject';
 
         this.API = API;
+        this.waitingToasts=[];
 
     }
     /*
@@ -25,6 +26,10 @@ export class FriendsQueryService {
      }
      }
      */
+    addToast(content)
+    {
+        this.waitingToasts.push(content);
+    }
     getInvitationsPromise(userId)
     {
         return this.API.all('user/friends/invitations/list').get('', {
@@ -46,6 +51,13 @@ export class FriendsQueryService {
     addFriendsPromise(userId,friendId)
     {
         return this.API.all('user/friends/add').get('', {
+            id: userId,
+            friend_id: friendId
+        });
+    }
+    refuseFriendsPromise(userId,friendId)
+    {
+        return this.API.all('user/friends/refuse').get('', {
             id: userId,
             friend_id: friendId
         });
