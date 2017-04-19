@@ -8,7 +8,12 @@ class ProfilePresController {
 
         this.profile = {};
         this.profileContents = [];
+
         this.ownProfile = false;
+        this.createPost = false;
+        this.createEvent = false;
+        this.createFile = false;
+
     }
 
     $onInit() {
@@ -17,7 +22,7 @@ class ProfilePresController {
             this.user.data = angular.copy(response);
             this.getContent();
         });
-        
+
         this.getProfile();
     }
 
@@ -28,7 +33,7 @@ class ProfilePresController {
         }).then((response) => {
             this.profile = angular.copy(response.data.user);
             this.profile.ppLink = this.profile.ppLink || 'img/default-user.png';
-            
+
             this.checkOwnProfile();
         });
     }
@@ -39,16 +44,45 @@ class ProfilePresController {
             user_id: this.id_user
         }).then((response) => {
             this.profileContents = angular.copy(response.data.contents);
+            
         });
     }
     
+    getCommentsFor(content_id) {
+        this.API.all('comment/list').get('', {
+            id: this.user.data.id,
+            content_id: content_id
+        }).then((response) => {
+            this.profileContents = angular.copy(response.data.contents);
+            
+        });
+    } 
+
     checkOwnProfile() {
-        console.log(this.user.data.id);
-        console.log(this.id_user);
         if (this.user.data.id == this.id_user) {
             this.ownProfile = true;
-            console.log('yo');
         }
+    }
+
+    toogleCreate(target, state) {
+        this.createPost = false;
+        this.createEvent = false;
+        this.createFile = false;
+
+        if (state) {
+            switch (target) {
+                case 'post':
+                    this.createPost = true;
+                    break;
+                case 'event':
+                    this.createEvent = true;
+                    break;
+                case 'file':
+                    this.createFile = true;
+                    break;
+            }
+        }
+
     }
 }
 

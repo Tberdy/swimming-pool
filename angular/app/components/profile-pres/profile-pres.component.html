@@ -19,20 +19,41 @@
         <div layout="column">
             <div><img ng-src="{{vm.profile.ppLink}}"></div>
         </div>
-        <div layout="row" ng-if="vm.ownProfile">
-            <md-button class="md-icon-button" aria-label="Nouveau post">
-                <md-icon class="material-icons">create</md-icon>
-                <md-tooltip md-direction="top">Nouveau post</md-tooltip>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Nouvel événement">
-                <md-icon class="material-icons">event</md-icon>
-                <md-tooltip md-direction="top">Nouvel événement</md-tooltip>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Nouvelle photo">
-                <md-icon class="material-icons">image</md-icon>
-                <md-tooltip md-direction="top">Nouvelle photo</md-tooltip>
-            </md-button>
+        <div ng-if="vm.ownProfile">
+            <div layout="row" >
+                <md-button class="md-icon-button" aria-label="Nouveau post" ng-click="vm.toogleCreate('post', true)">
+                    <md-icon class="material-icons">create</md-icon>
+                    <md-tooltip md-direction="top">Nouveau post</md-tooltip>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Nouvel événement" ng-click="vm.toogleCreate('event', true)">
+                    <md-icon class="material-icons">event</md-icon>
+                    <md-tooltip md-direction="top">Nouvel événement</md-tooltip>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Nouvelle photo" ng-click="vm.toogleCreate('file', true)">
+                    <md-icon class="material-icons">image</md-icon>
+                    <md-tooltip md-direction="top">Nouvelle photo</md-tooltip>
+                </md-button>
+            </div>
+            <div ng-if="vm.createPost">
+                <md-input-container>
+                    <label>Texte</label>
+                    <input type="text" ng-model="vm.yolo">
+                </md-input-container>
+            </div>
+            <div ng-if="vm.createEvent">
+                <md-input-container>
+                    <label>Texte</label>
+                    <input type="text" ng-model="vm.yolo">
+                </md-input-container>
+            </div>
+            <div ng-if="vm.createFile">
+                <md-input-container>
+                    <label>Texte</label>
+                    <input type="text" ng-model="vm.yolo">
+                </md-input-container>
+            </div>
         </div>
+
         <md-card ng-repeat="content in vm.profileContents">
             <img ng-if="content.type === 'picture'" ng-src="{{content.file}}" class="md-card-image">
             <md-card-content>
@@ -49,6 +70,11 @@
                     <md-tooltip md-direction="top">Commenter</md-tooltip>
                 </md-button>
             </md-card-actions>
+            <md-card ng-repeat="">
+                <md-card-content>
+                    <p>Yolo</p>
+                </md-card-content>
+            </md-card>
         </md-card>
     </div>
 </div>
