@@ -17,13 +17,6 @@ class FriendsRequestController{
                 this.friendsRequest = angular.copy(response.data.fRequests);
             });
         });
-        /*
-        this.people = [
-            {name: 'Taha Miyara', img: 'img/example/taha.jpg', selected: false},
-            {name: 'Thomas Berdy', img: 'img/example/thomas.jpg', selected: false},
-            {name: 'Mark Zuckerberg', img: 'img/example/mark.jpg', selected: false}
-        ];
-        */
     }
 }
 
