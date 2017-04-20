@@ -1,48 +1,46 @@
-<md-dialog>
-    <div ng-cloak>
-        <md-content class="md-padding">
-            <md-nav-bar
-                md-selected-nav-item="page1"
-                nav-bar-aria-label="navigation links">
-                <md-nav-item md-nav-click="goto('page1')" name="page1">
-                    Page One
-                </md-nav-item>
-                <md-nav-item md-nav-click="goto('page2')" name="page2">
-                    Page Two
-                </md-nav-item>
-                <md-nav-item md-nav-click="goto('page3')" name="page3">
-                    Page Three
-                </md-nav-item>
-
-            </md-nav-bar>
-            <div class="ext-content">
-                External content for `<span>{{currentNavItem}}</span>`.
-            </div>
-
-            <md-checkbox ng-model="disableInkBar">Disable Ink Bar</md-checkbox>
-
-        </md-content>
-    </div>
+<md-dialog style="max-height: 90vh; min-width: 80vh; max-width: 90vh;">
     <form ng-submit="vm.save()">
 
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Profile-edit</h2>
+                <h2>Édition de profil</h2>
             </div>
         </md-toolbar>
 
-        <md-dialog-content>
-            <div class="md-dialog-content">
-                <md-input-container flex>
-                    <label>Data</label>
-                    <input type="text">
-                </md-input-container>
+        <md-dialog-content layout="row" layout-align="center">
+            <div class="md-block" style="margin-right: 3em;margin-top: 1em;">
+                <label>Photo de profil</label>
+                <div></div>
             </div>
+            <md-content layout="column" layout-align="center start" style="overflow: visible;">
+                <md-input-container style="width: 100%">
+                    <label>Nom</label>
+                    <input ng-model="user.name" placeholder="Laissez vide pour ne rien changer.">
+                </md-input-container>
+                <md-input-container style="width: 100%">
+                    <label>Prénom</label>
+                    <input  ng-model="user.firstate" placeholder="Laissez vide pour ne rien changer.">
+                </md-input-container>
+                <md-input-container>
+                    <label>Sexe</label>
+                    <md-select ng-model="user.gender">
+                        <md-option ng-repeat="gender in vm.genders" value="{{gender}}">
+                            {{gender}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <div class="md-block" style="position: relative;">
+                        <label>Date d'anniversaire</label>
+                        <md-datepicker ng-model="user.birthday" ></md-datepicker>
+                </div>
+
+            </md-content>
+
         </md-dialog-content>
 
         <md-dialog-actions>
-            <md-button type="button" ng-click="vm.cancel()">Cancel</md-button>
-            <md-button class="md-primary md-raised" type="submit">Save</md-button>
+            <md-button type="button" ng-click="vm.cancel()">ANNULER</md-button>
+            <md-button class="md-primary md-raised" type="submit">ENREGISTRER</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

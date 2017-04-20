@@ -1,4 +1,4 @@
-import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
+import {ProfileEditController} from '../../../dialogs/profile-edit/profile-edit.dialog.js';
 
 class PostDisplayProfileController {
     constructor($stateParams, DialogService, API, CurrentUserService, ToastService) {
@@ -37,18 +37,17 @@ class PostDisplayProfileController {
         });
 
     }
-    commentsDialog(post) {
+    editProfilDialog() {
         let options = {
-            controller: CommentsDisplayController,
+            controller: ProfileEditController,
             controllerAs: 'vm',
             locals:
                     {
-                        contentId: post.id,
                         user: this.user
                     }
         }
 
-        this.Dialog.fromTemplate('commentsDisplay', options);
+        this.Dialog.fromTemplate('profile-edit', options);
     }
 
     sortPosts() {
