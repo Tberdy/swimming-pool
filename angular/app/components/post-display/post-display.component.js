@@ -12,7 +12,7 @@ class PostDisplayController {
         this.currentFriends = null;
         this.done = false;
         this.toast = ToastService;
-        this.numberComments = [];
+        this.comments = [];
         //var cpts = 0;
         this.data = [];
         this.content = [];
@@ -31,31 +31,12 @@ class PostDisplayController {
                     promisePost.then((response) => {
 
 
-                        if (angular.copy(response.data.posts) !== null)
+                        if (angular.copy(response.data.posts) !== null )
                         {
-                            this.content.push(angular.copy(response.data.posts));
+                            var currentPost =angular.copy(response.data.posts);
+                            this.content.push(currentPost);
                             this.associate();
                             this.sortPosts();
-                            /*
-                             console.log(angular.copy(response.data.posts));
-                             var a = angular.copy(response.data.posts);
-                             this.content.push(a);
-                             
-                             for (var i in a)
-                             {
-                             let promiseNum = this.ContentQuery.getNumberOfComments(a[i].id);
-                             promiseNum.then((response) => {
-                             this.numberComments.push(
-                             {
-                             id: a[i].id,
-                             val: angular.copy(response)
-                             });
-                             this.associate();
-                             this.sortPosts();
-                             
-                             });
-                             }
-                             */
 
                         }
 
@@ -88,24 +69,16 @@ class PostDisplayController {
                 for (var j in this.currentFriends)
                 {
 
-
-                    /*
-                     for (var k in this.numberComments)
-                     {
-                     */
                     if (this.currentFriends[j].id === currentContent[i].user_id /*&& this.numberComments[k].id==currentContent[i].id*/)
                     {
                         console.log("wesh");
                         this.data.push({
                             user: this.currentFriends[j],
                             content: currentContent[i],
-                            numberComments: 0 /*this.numberComments[k].val*/
+                            comments:0
                         });
                         break;
                     }
-                    /*
-                     }
-                     */
 
 
 

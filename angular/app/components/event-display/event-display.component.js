@@ -27,9 +27,9 @@ class EventDisplayController{
                     let promise = this.ContentQuery.getEventsPromise(this.currentFriends[k].id);
                     promise.then((response) => {
 
-                        if (angular.copy(response.data.posts) !== null)
+                        if (angular.copy(response.data.events) !== null)
                         {
-                            this.content.push(angular.copy(response.data.posts));
+                            this.content.push(angular.copy(response.data.events));
                             this.associate();
                             this.sortPosts();
 
@@ -56,7 +56,7 @@ class EventDisplayController{
                             user: this.currentFriends[j],
                             content: currentContent[i]
                         });
-                    }r
+                    }
                 }
             }
 
