@@ -1,8 +1,9 @@
 export class ProfileEditController{
-    constructor(DialogService){
+    constructor(DialogService,user){
         'ngInject';
-
+        this.user=user;
         this.DialogService = DialogService;
+        this.genders=["Homme","Femme"];
     }
 
     save(){
