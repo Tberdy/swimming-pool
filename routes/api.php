@@ -53,6 +53,7 @@ Route::post('content/delete', 'ContentController@delete');
 Route::get('comment/get', 'CommentController@get');
 Route::get('comments/list', 'CommentController@listPerContent');
 Route::get('comments/list/byuser', 'CommentController@listPerUser');
+Route::get('comments/count', 'CommentController@countComments');
 Route::post('comments/add', 'CommentController@add');
 Route::post('comments/delete', 'CommentController@delete');
 

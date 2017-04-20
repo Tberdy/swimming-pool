@@ -26,6 +26,12 @@ class CommentController extends Controller
         return response()->success(compact('comments'));
     }
     
+    public function countComments(Request $request) {
+        $content = Content::find($request->content_id);
+        $count = $content->comments()->count();
+        return response()->success(compact('count'));
+    }
+    
     public function add(Request $request) {
         $comment = new Comment;
         $comment->user_id = $request->id;
