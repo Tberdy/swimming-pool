@@ -9,7 +9,6 @@ class PostDisplayController {
         this.user = null;
         this.currentFriends = null;
         this.done = false;
-        this.friendsLoaded = false;
         //var cpts = 0;
         this.data=[];
         /*
@@ -31,13 +30,12 @@ class PostDisplayController {
             let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
             promiseFriends.then((response) => {
                 this.currentFriends = angular.copy(response.data.friends);
-                this.friendsLoaded = true;
                 for (var k = 0; k < this.currentFriends.length; k++)
                 {
                     let promise = this.ContentQuery.getPostsPromise(this.currentFriends[k].id);
                     promise.then((response) => {
 
-                        this.cpts++;
+                        //this.cpts++;
                         if (angular.copy(response.data.posts) !== null)
                         {
                             this.content.push(angular.copy(response.data.posts));
@@ -49,7 +47,7 @@ class PostDisplayController {
                     });
                     let promisePic = this.ContentQuery.getPicturesPromise(this.currentFriends[k].id);
                     promisePic.then((response) => {
-                        this.cpts++;
+                        //this.cpts++;
                         if (angular.copy(response.data.pictures) !== null)
                         {
                             this.content.push(angular.copy(response.data.pictures));

@@ -1,0 +1,25 @@
+<md-subheader class="md-no-sticky subheader">Mes événements</md-subheader>
+<md-content>
+    <div layout="column" class="event-content"> <!--ng-if="vm.isDone()"!-->
+        <md-card ng-repeat="event in vm.data">
+            <md-card-header>
+                <md-card-avatar>
+                    <img class="md-avatar-icon" ng-src="{{event.user.img}}">
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">{{event.user.firstname}} {{event.user.name}}</span>
+                    <span class="md-subhead">{{vm.delay(event)}}</span>
+                </md-card-header-text>
+            </md-card-header>
+            <img ng-if="vm.isPicture(post)" ng-src="{{event.content.file}}" class="md-card-image">
+
+            <md-card-content ng-if="vm.isText(event)">
+                <p>{{event.content.text}}</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="start center">
+                <md-button>J'aime</md-button>
+                <md-button ng-click="vm.test()">J'adore</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+</md-content>
