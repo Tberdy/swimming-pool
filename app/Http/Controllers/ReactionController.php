@@ -26,6 +26,12 @@ class ReactionController extends Controller
         return response()->success(compact('reactions'));
     }
     
+    public function countReactions(Request $request) {
+        $content = Content::find($request->content_id);
+        $count = $content->reactions()->count();
+        return response()->success(compact('count'));
+    }
+    
     public function add(Request $request) {
         $reaction = new Reaction;
         $reaction->user_id = $request->id;

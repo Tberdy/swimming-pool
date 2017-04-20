@@ -53,14 +53,14 @@ export class CommentsDisplayController {
     sortComments()
     {
         this.data.sort(function (a, b) {
-            return Date.parse(b.content.created_at) - Date.parse(a.content.created_at);
+            return Date.parse(b.content.updated_at) - Date.parse(a.content.updated_at);
         });
     }
     delay(comment)
     {
         if (comment === null || typeof comment === 'undefined')
             return 0;
-        var diff = Date.now() - Date.parse(comment.content.created_at);
+        var diff = Date.now() - Date.parse(comment.content.updated_at);
 
         var sec = parseInt(diff / 1000);
         var min = parseInt(sec / 60);

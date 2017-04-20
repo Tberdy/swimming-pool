@@ -11,45 +11,40 @@
                     <span class="md-subhead">{{vm.delay(post)}}</span>
                 </md-card-header-text>
             </md-card-header>
-            <img ng-if="vm.isPicture(post)" ng-src="{{post.content.file}}" class="md-card-image">
+            <img ng-if="vm.isPicture(post)" ng-src="{{post.file}}" class="md-card-image">
 
             <md-card-content ng-if="vm.isText(post)">
-                <p>{{post.content.text}}</p>
+                <p>{{post.text}}</p>
             </md-card-content>
             <md-card-actions class="button-content" layout="row" layout-align="center center">
                 
                 <div layout="column"  layout-align="center center">
-                    <p>11</p>
+                    <p>{{post.reactions['like']}}</p>
                     <md-button><i class="material-icons">thumb_up</i></md-button>
                 </div>
                 <div layout="column"  layout-align="center center">
-                    <p>13</p>
+                    <p>{{post.reactions['love']}}</p>
                     <md-button><i class="material-icons">favorite</i></md-button>
                 </div>
                 <div layout="column"  layout-align="center center">
-                    <p>3</p>
+                    <p>{{post.reactions['dislike']}}</p>
                     <md-button><i class="material-icons">thumb_down</i></md-button>
                 </div>
                 <div layout="column"  layout-align="center center">
-                    <p>{{post.nb_thumbsup}}</p>
+                    <p>{{post.reactions['happy']}}</p>
                     <md-button><i class="material-icons">insert_emoticon</i></md-button>
                 </div>
-                
                 <div layout="column"  layout-align="center center">
-                    <p>{{post.nb_thumbsup}}</p>
+                    <p>{{post.reactions['neutral']}}</p>
                     <md-button><i class="material-icons">sentiment_neutral</i></md-button>
                 </div>
                 <div layout="column"  layout-align="center center">
-                    <p>{{post.nb_thumbsup}}</p>
+                    <p>{{post.reactions['fire']}}</p>
                     <md-button><i class="material-icons">whatshot</i></md-button>
                 </div>
             </md-card-actions>
-            <md-button class="button-comments" ng-click="vm.commentsDialog(post)">Afficher les commentaires <!--{{vm.displayNumberComments(post)}}!--></md-button>
+            <md-button class="button-comments" ng-click="vm.commentsDialog(post)">{{post.count}} Commentaire(s) - Afficher les commentaires <!--{{vm.displayNumberComments(post)}}!--></md-button>
 
         </md-card>
     </div>
 </md-content>
-<!--
-<div ng-repeat="data in vm.postData">{{data}}</div>
-
-!-->

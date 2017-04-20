@@ -42,6 +42,7 @@ Route::post('user/friends/delete', 'UserController@deleteFriend');
 
 Route::get('content/get', 'ContentController@get');
 Route::get('content/list', 'ContentController@listAll');
+Route::get('content/friends/list', 'ContentController@listFriendsAll');
 Route::get('content/list/posts', 'ContentController@listPosts');
 Route::get('content/list/events', 'ContentController@listEvents');
 Route::get('content/list/pictures', 'ContentController@listPictures');
@@ -60,6 +61,7 @@ Route::post('comments/delete', 'CommentController@delete');
 Route::get('reaction/get', 'ReactionController@get');
 Route::get('reactions/list', 'ReactionController@listPerContent');
 Route::get('reactions/list/byuser', 'ReactionController@listPerUser');
+Route::get('reactions/count', 'ReactionController@countReactions');
 Route::post('reactions/add', 'ReactionController@add');
 Route::post('reactions/update', 'ReactionController@update');
 Route::post('reactions/delete', 'ReactionController@delete');

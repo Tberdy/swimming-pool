@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User as User;
 use App\Content as Content;
+use App\Reaction as Reaction;
 
 class ContentController extends Controller {
 
@@ -16,6 +17,41 @@ class ContentController extends Controller {
     public function listAll(Request $request) {
         $user = User::find($request->user_id);
         $contents = $user->contents()->get();
+        return response()->success(compact('contents'));
+    }
+    
+    public function listFriendsAll(Request $request) {
+        $user = User::find($request->id);
+        $friends = array();
+        $friendsIAdded = $user->friendsIAdded()->get();
+        $friendsWhoAddMe = $user->friendsWhoAddMe()->get();
+        
+        foreach ($friendsIAdded as $fr1) {
+            foreach ($friendsWhoAddMe as $fr2) {
+                if ($fr1->id == $fr2->id) {
+                    $friends[] = $fr1;
+                    break;
+                }
+            }
+        }
+        
+        $contents = array();
+        foreach ($friends as $friend) {
+            $content = $friend->contents()->get();
+            foreach ($content as $value) {
+                $value->reactions = array(
+                    'like' => $value->reactions()->where('type', '=', 'like')->count(),
+                    'love' => $value->reactions()->where('type', '=', 'love')->count(),
+                    'dislike' => $value->reactions()->where('type', '=', 'dislike')->count(),
+                    'happy' => $value->reactions()->where('type', '=', 'happy')->count(),
+                    'neutral' => $value->reactions()->where('type', '=', 'neutral')->count(),
+                    'fire' => $value->reactions()->where('type', '=', 'fire')->count()
+                );
+                $value->user = $friend;
+                $contents[] = $value;
+            }
+        }
+
         return response()->success(compact('contents'));
     }
 

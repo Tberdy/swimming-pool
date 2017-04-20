@@ -22,70 +22,17 @@ class PostDisplayController {
         let promiseUser = this.CurrentUser.getUserPromise();
         promiseUser.then((response) => {
             this.user = angular.copy(response);
-            let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
-            promiseFriends.then((response) => {
-                this.currentFriends = angular.copy(response.data.friends);
-                for (var k = 0; k < this.currentFriends.length; k++)
-                {
-                    let promisePost = this.ContentQuery.getPostsPromise(this.currentFriends[k].id);
-                    promisePost.then((response) => {
-
-
-                        if (angular.copy(response.data.posts) !== null )
-                        {
-                            var currentPost =angular.copy(response.data.posts);
-                            this.content.push(currentPost);
-                            this.associate();
-                            this.sortPosts();
-
-                        }
-
-
-                    });
-                    let promisePic = this.ContentQuery.getPicturesPromise(this.currentFriends[k].id);
-                    promisePic.then((response) => {
-                        //this.cpts++;
-                        if (angular.copy(response.data.pictures) !== null)
-                        {
-                            this.content.push(angular.copy(response.data.pictures));
-                            this.associate();
-                            this.sortPosts();
-                            this.toast.displayToasts();
-                        }
-                    });
-                }
-
+            this.API.all('content/friends/list').get('', {
+                id: this.user.id
+            }).then((response) => {
+                this.data = angular.copy(response.data.contents);
+                angular.forEach(this.data, function (value, key) {
+                    this.countComments(value.id, key);
+                }.bind(this));
+                this.sortPosts();
             });
         });
 
-    }
-    associate()
-    {
-        if (this.content !== null && this.content.length > 0)
-        {
-            var currentContent = this.content.pop();
-            for (var i in currentContent)
-            {
-                for (var j in this.currentFriends)
-                {
-
-                    if (this.currentFriends[j].id === currentContent[i].user_id /*&& this.numberComments[k].id==currentContent[i].id*/)
-                    {
-                        console.log("wesh");
-                        this.data.push({
-                            user: this.currentFriends[j],
-                            content: currentContent[i],
-                            comments:0
-                        });
-                        break;
-                    }
-
-
-
-                }
-            }
-
-        }
     }
     displayNumberComments(post)
     {
@@ -95,9 +42,15 @@ class PostDisplayController {
             return "1 commentaire - Voir les commentaires.";
         if (post.numberComments > 1)
             return  post.numberComments + " commentaires - Voir les commentaires.";
-        console.log("nbCom:");
-        console.log(post.numberComments);
         return "Error in numberComments";
+    }
+    countComments(content_id, key) {
+        this.API.all('comments/count').get('', {
+            id: this.user.id,
+            content_id: content_id
+        }).then((response) => {
+            this.data[key].count = angular.copy(response.data.count);
+        });
     }
     commentsDialog(post)
     {
@@ -106,7 +59,7 @@ class PostDisplayController {
             controllerAs: 'vm',
             locals:
                     {
-                        contentId: post.content.id,
+                        contentId: post.id,
                         user: this.user
                     }
         }
@@ -116,14 +69,14 @@ class PostDisplayController {
     sortPosts()
     {
         this.data.sort(function (a, b) {
-            return Date.parse(b.content.date) - Date.parse(a.content.date);
+            return Date.parse(b.updated_at) - Date.parse(a.updated_at);
         });
     }
     delay(post)
     {
         if (post === null || typeof post === 'undefined')
             return 0;
-        var diff = Date.now() - Date.parse(post.content.date);
+        var diff = Date.now() - Date.parse(post.updated_at);
 
         var sec = parseInt(diff / 1000);
         var min = parseInt(sec / 60);
@@ -160,13 +113,13 @@ class PostDisplayController {
     }
     isPicture(post)
     {
-        if (post.content.type === "picture")
+        if (post.type === "picture")
             return true;
         return false;
     }
     isText(post)
     {
-        if (post.content.type === "post")
+        if (post.type === "post")
             return true;
         return false;
     }
