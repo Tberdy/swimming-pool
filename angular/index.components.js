@@ -1,3 +1,4 @@
+import {PostDisplayProfileComponent} from './app/components/post-display-profile/post-display-profile.component';
 import {EventDisplayComponent} from './app/components/event-display/event-display.component';
 import {PostDisplayComponent} from './app/components/post-display/post-display.component';
 import {FriendsInvitationComponent} from './app/components/friends-invitation/friends-invitation.component';
@@ -13,6 +14,7 @@ import {LoginFormComponent} from './app/components/login-form/login-form.compone
 import {RegisterFormComponent} from './app/components/register-form/register-form.component';
 
 angular.module('app.components')
+	.component('postDisplayProfile', PostDisplayProfileComponent)
 	.component('eventDisplay', EventDisplayComponent)
 	.component('postDisplay', PostDisplayComponent)
 	.component('friendsInvitation', FriendsInvitationComponent)
