@@ -1,0 +1,45 @@
+<md-dialog style="max-height: 90vh; min-width: 70vh; max-width: 90vh; overflow-y: auto; padding-right: -25px;">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools" style="text-align: center;">
+                <h2>Commentaires</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div layout="column" class="post-content">
+                <md-card ng-repeat="comment in vm.data">
+                    <md-card-header>
+                        <md-card-avatar>
+                            <img class="md-avatar-icon" ng-src="{{comment.user.img}}">
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">{{comment.user.firstname}} {{comment.user.name}}</span>
+                            <span class="md-subhead">{{vm.delay(comment)}}</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <p>{{comment.content.text}}</p>
+                    </md-card-content>
+                </md-card>
+                <md-card id="template">
+                    <md-card-header>
+                        <md-card-avatar>
+                            <img class="md-avatar-icon" ng-src="img/example/mark.jpg">
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Mark Zuckerberg</span>
+                            <span class="md-subhead">Il y a 1 heure.</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <p>Mdr lol c tro b1 votr site.</p>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button type="button" ng-click="vm.cancel()">OK</md-button>
+            <md-button class="md-primary md-raised" ng-click="vm.save()">Envoyer</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

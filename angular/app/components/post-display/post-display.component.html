@@ -17,13 +17,35 @@
                 <p>{{post.content.text}}</p>
             </md-card-content>
             <md-card-actions class="button-content" layout="row" layout-align="center center">
-                <md-button ng-click="vm.test()"><i class="material-icons">thumb_up</i></md-button>
-                <md-button><i class="material-icons">favorite</i></md-button>
-                <md-button><i class="material-icons">thumb_down</i></md-button>
-                <md-button><i class="material-icons">insert_emoticon</i></md-button>
-                <md-button><i class="material-icons">sentiment_neutral</i></md-button>
-                <md-button><i class="material-icons">whatshot</i></md-button>
+                
+                <div layout="column"  layout-align="center center">
+                    <p>11</p>
+                    <md-button><i class="material-icons">thumb_up</i></md-button>
+                </div>
+                <div layout="column"  layout-align="center center">
+                    <p>13</p>
+                    <md-button><i class="material-icons">favorite</i></md-button>
+                </div>
+                <div layout="column"  layout-align="center center">
+                    <p>3</p>
+                    <md-button><i class="material-icons">thumb_down</i></md-button>
+                </div>
+                <div layout="column"  layout-align="center center">
+                    <p>{{post.nb_thumbsup}}</p>
+                    <md-button><i class="material-icons">insert_emoticon</i></md-button>
+                </div>
+                
+                <div layout="column"  layout-align="center center">
+                    <p>{{post.nb_thumbsup}}</p>
+                    <md-button><i class="material-icons">sentiment_neutral</i></md-button>
+                </div>
+                <div layout="column"  layout-align="center center">
+                    <p>{{post.nb_thumbsup}}</p>
+                    <md-button><i class="material-icons">whatshot</i></md-button>
+                </div>
             </md-card-actions>
+            <md-button class="button-comments" ng-click="vm.commentsDialog(post)"> 1 commentaire -  Afficher les commentaires</md-button>
+
         </md-card>
     </div>
 </md-content>

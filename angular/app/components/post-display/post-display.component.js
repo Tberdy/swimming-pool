@@ -1,3 +1,5 @@
+import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
+
 class PostDisplayController {
     constructor(DialogService, API, CurrentUserService, FriendsQueryService, ContentQueryService) {
         'ngInject';
@@ -11,16 +13,7 @@ class PostDisplayController {
         this.done = false;
         //var cpts = 0;
         this.data=[];
-        /*
-        this.data = [
-            {
-                user: null,
-                content: null
-            }
-        ];
-        */
         this.content = [];
-        //this.postData = null;
     }
     $onInit()
     {
@@ -80,6 +73,19 @@ class PostDisplayController {
             }
 
         }
+    }
+    commentsDialog(post)
+    {
+        let options = {
+            controller: CommentsDisplayController,
+            controllerAs: 'vm',
+            locals:
+                    {
+                        contentId: post.content.id
+                    }
+        }
+        
+        this.Dialog.fromTemplate('commentsDisplay', options);
     }
     sortPosts()
     {

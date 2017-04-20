@@ -45,7 +45,7 @@ class FriendsListController {
         return user.firstname+ " " + user.name;
     }
     querySearch(query) {
-        if (query != "")
+        if (query !== "")
         {
             this.emptyQuery=false;
             var results = [];
