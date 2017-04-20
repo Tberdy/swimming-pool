@@ -42,7 +42,7 @@
                     <md-button ng-click="vm.react('fire', key, post)" ng-class="vm.data[key].style['fire']"><i class="material-icons">whatshot</i></md-button>
                 </div>
             </md-card-actions>
-            <md-button class="button-comments" ng-click="vm.commentsDialog(post)">{{post.count}} Commentaire(s) - Afficher les commentaires <!--{{vm.displayNumberComments(post)}}!--></md-button>
+            <md-button class="button-comments" ng-click="vm.commentsDialog(post)">{{vm.data[key].count}} Commentaire(s) - Afficher les commentaires <!--{{vm.displayNumberComments(post)}}!--></md-button>
 
         </md-card>
     </div>
