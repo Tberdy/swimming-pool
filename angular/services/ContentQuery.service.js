@@ -19,7 +19,7 @@ export class ContentQueryService {
     }
     getEventsPromise(userId)
     {
-        return this.API.all('content/list/event').get('', {
+        return this.API.all('content/list/events').get('', {
             user_id: userId
         })
     }
