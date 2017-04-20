@@ -119,7 +119,20 @@ class PostDisplayProfileController {
             }.bind(this));
             this.sortPosts();
         });
-    }    
+    }  
+    
+    getReactions() {
+        this.API.all('reactions/list').get('', {
+            id: this.user.id,
+            user_id: this.id_user
+        }).then((response) => {
+            this.data = angular.copy(response.data.contents);
+            angular.forEach(this.data, function (value, key) {
+                this.countComments(value.id, key);
+            }.bind(this));
+            this.sortPosts();
+        });
+    }
 
     countComments(content_id, key) {
         this.API.all('comments/count').get('', {
