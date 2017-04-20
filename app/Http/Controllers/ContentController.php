@@ -41,7 +41,7 @@ class ContentController extends Controller {
         $content = new Content;
         $content->user_id = $request->id;
         $content->type = 'post';
-        $content->text = trim($request->data->text);
+        $content->text = trim($request->text);
         $content->save();
         return response()->success(array());
     }
@@ -50,8 +50,8 @@ class ContentController extends Controller {
         $content = new Content;
         $content->user_id = $request->id;
         $content->type = 'event';
-        $content->text = trim($request->data->text);
-        $content->date = date( "Y-m-d H:i:s", strtotime($request->data->date));
+        $content->text = trim($request->text);
+        $content->date = date( "Y-m-d H:i:s", strtotime($request->date));
         $content->save();
         return response()->success(array());
     }
