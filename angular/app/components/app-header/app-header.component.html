@@ -5,7 +5,6 @@
                 <img src="img/logo/signature.png" ui-sref="app.landing" class="Header-logo"/>
                 <div layout="row" layout-align="center stretch">
                     <a hide-xs class="AppHeader-link md-subhead" ui-sref="app.news">Chronologie</a>
-                    <a hide-xs class="AppHeader-link md-subhead" ui-sref="app.landing">A propos</a>
                     <a hide-xs class="AppHeader-link md-subhead" ui-sref="app.friends">Amis</a>
                     <a hide-xs class="AppHeader-link md-subhead" ui-sref="app.landing">Photos</a>
                     <a hide-xs class="AppHeader-link md-subhead" ui-sref="app.chat">Chat</a>
@@ -13,6 +12,7 @@
                 <div>
                     <a hide-xs class="AppHeader-link md-subhead" ng-if="vm.user.isAuth()" ui-sref="app.profile({ id_user: vm.user.data.id })">{{vm.user.data.firstname}} {{vm.user.data.name}}</a>
                     <a hide-xs class="AppHeader-link md-subhead" ng-if="!vm.user.isAuth()" ui-sref="app.login">Login</a>
+                    <a hide-xs class="AppHeader-link md-subhead" ng-if="vm.user.isAuth()" ng-click="vm.logout()">Logout</a>
                 </div>
             </div>
         </div>
