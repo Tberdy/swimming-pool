@@ -36,7 +36,16 @@
                     </md-card-content>
                 </md-card>
             </div>
+            <md-input-container class="md-block" style="margin-left: 1em;margin-right: 1em;">
+                <label>Écrire un commentaire.</label>
+                <textarea ng-model="vm.newComment" rows="5" md-select-on-focus style="min-height: 40em;padding-bottom: 0;"></textarea>
+                <div ng-messages="vm.isEmpty()">
+                    <div ng-message="empty">Votre commentaire est vide !</div>
+                    <div ng-message="unempty">Exprimez vous !</div>
+                </div>
+            </md-input-container>
         </md-dialog-content>
+
         <md-dialog-actions>
             <md-button type="button" ng-click="vm.cancel()">OK</md-button>
             <md-button class="md-primary md-raised" ng-click="vm.save()">Envoyer</md-button>
