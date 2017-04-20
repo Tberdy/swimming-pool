@@ -83,4 +83,13 @@ class User extends Authenticatable implements JWTSubject
     public function comments() {
         return $this->hasMany('App\Comment');
     }
+    
+    /**
+    * Return a key value array, containing any reactions owned by user
+    *
+    * @return array
+    */
+    public function reactions() {
+        return $this->hasMany('App\Reaction');
+    }
 }

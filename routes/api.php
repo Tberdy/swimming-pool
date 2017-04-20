@@ -55,3 +55,10 @@ Route::get('comments/list', 'CommentController@listPerContent');
 Route::get('comments/list/byuser', 'CommentController@listPerUser');
 Route::post('comments/add', 'CommentController@add');
 Route::post('comments/delete', 'CommentController@delete');
+
+Route::get('reaction/get', 'ReactionController@get');
+Route::get('reactions/list', 'ReactionController@listPerContent');
+Route::get('reactions/list/byuser', 'ReactionController@listPerUser');
+Route::post('reactions/add', 'ReactionController@add');
+Route::post('reactions/add', 'ReactionController@update');
+Route::post('reactions/delete', 'ReactionController@delete');
