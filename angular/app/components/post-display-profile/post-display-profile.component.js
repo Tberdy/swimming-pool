@@ -1,3 +1,4 @@
+import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
 import {ProfileEditController} from '../../../dialogs/profile-edit/profile-edit.dialog.js';
 
 class PostDisplayProfileController {
@@ -49,7 +50,20 @@ class PostDisplayProfileController {
 
         this.Dialog.fromTemplate('profile-edit', options);
     }
+    commentsDialog(post)
+    {
+        let options = {
+            controller: CommentsDisplayController,
+            controllerAs: 'vm',
+            locals:
+                    {
+                        contentId: post.id,
+                        user: this.user
+                    }
+        }
 
+        this.Dialog.fromTemplate('commentsDisplay', options);
+    }
     sortPosts() {
         this.data.sort(function (a, b) {
             return Date.parse(b.created_at) - Date.parse(a.created_at);
@@ -153,6 +167,10 @@ class PostDisplayProfileController {
                 this.createFile = !this.createFile;
                 break;
         }
+    }
+    
+    react(type, content_id) {
+        console.log(content_id);
     }
 }
 
