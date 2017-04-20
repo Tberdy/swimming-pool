@@ -1,4 +1,5 @@
 import {ProfileEditController} from '../../../dialogs/profile-edit/profile-edit.dialog.js';
+import {CreateContentController} from '../../../dialogs/create-content/create-content.dialog.js';
 
 class PostDisplayProfileController {
     constructor($stateParams, DialogService, API, CurrentUserService, ToastService) {
@@ -48,6 +49,19 @@ class PostDisplayProfileController {
         }
 
         this.Dialog.fromTemplate('profile-edit', options);
+    }
+    createContentDialog()
+    {
+        let options = {
+            controller: CreateContentController,
+            controllerAs: 'vm',
+            locals:
+                    {
+                        user: this.user
+                    }
+        }
+
+        this.Dialog.fromTemplate('create-content', options);
     }
 
     sortPosts() {
