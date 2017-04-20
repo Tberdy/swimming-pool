@@ -11,9 +11,8 @@
                     <span class="md-subhead">{{vm.delay(event)}}</span>
                 </md-card-header-text>
             </md-card-header>
-            <img ng-if="vm.isPicture(post)" ng-src="{{event.content.file}}" class="md-card-image">
 
-            <md-card-content ng-if="vm.isText(event)">
+            <md-card-content>
                 <p>{{event.content.text}}</p>
             </md-card-content>
             <md-card-actions layout="row" layout-align="start center">

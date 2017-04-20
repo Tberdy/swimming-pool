@@ -36,6 +36,12 @@ export class ContentQueryService {
             content_id:contentId
         })
     }
+    getNumberOfComments(contentId)
+    {
+        return this.API.all('comments/count').get('', {
+            content_id:contentId
+        })
+    }
     addCommentPromise(userId,contentId,text)
     {
         return this.API.all('comments/add').post('', {
