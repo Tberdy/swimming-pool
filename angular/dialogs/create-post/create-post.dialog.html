@@ -1,24 +1,26 @@
-<md-dialog>
+<md-dialog style="max-height: 90vh; min-width: 80vh; max-width: 90vh;">
     <form ng-submit="vm.save()">
 
         <md-toolbar>
-          <div class="md-toolbar-tools">
-            <h2>Create-post</h2>
-          </div>
+            <div class="md-toolbar-tools">
+                <h2>Créer un statut</h2>
+            </div>
         </md-toolbar>
 
-        <md-dialog-content>
-            <div class="md-dialog-content">
-                <md-input-container flex>
-                    <label>Data</label>
-                    <input type="text">
+        <md-dialog-content layout="row" layout-align="center">
+            <md-content layout="column" layout-align="none" style="overflow: visible;">
+                <md-input-container class="md-block" style="margin-left: 1em;margin-right: 1em;">
+                    <label>Écrivez vos status.</label>
+                    <textarea ng-model="vm.post.text" rows="5" md-select-on-focus style="min-height: 40em;padding-bottom: 0;"></textarea>
+                    <p>{{vm.message}}<p>
                 </md-input-container>
-             </div>
+            </md-content>
+
         </md-dialog-content>
 
         <md-dialog-actions>
-            <md-button type="button" ng-click="vm.cancel()">Cancel</md-button>
-            <md-button class="md-primary md-raised" type="submit">Save</md-button>
+            <md-button type="button" ng-click="vm.cancel()">ANNULER</md-button>
+            <md-button class="md-primary md-raised" type="submit">ENREGISTRER</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>
