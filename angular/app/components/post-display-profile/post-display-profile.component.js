@@ -1,107 +1,65 @@
 import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
 
 class PostDisplayProfileController {
-    constructor(DialogService, API, CurrentUserService, FriendsQueryService, ContentQueryService, ToastService) {
+    constructor($stateParams, DialogService, API, CurrentUserService, ToastService) {
         'ngInject';
+
+        this.id_user = $stateParams.id_user;
         this.Dialog = DialogService;
         this.API = API;
         this.CurrentUser = CurrentUserService;
-        this.FriendsQuery = FriendsQueryService;
-        this.ContentQuery = ContentQueryService;
         this.user = null;
-        this.currentFriends = null;
-        this.done = false;
         this.toast = ToastService;
-        //var cpts = 0;
         this.data = [];
-        this.content = [];
+
+        this.ownProfile = false;
+        this.createPost = false;
+        this.createEvent = false;
+        this.createFile = false;
+
+        this.dzOptions = {
+            url: '/api/content/add/file',
+            params: {
+                id: null
+            },
+            maxFilesize: '10',
+            addRemoveLinks: false,
+            maxFiles: 1
+        };
     }
-    $onInit()
-    {
+    $onInit() {
         let promiseUser = this.CurrentUser.getUserPromise();
         promiseUser.then((response) => {
             this.user = angular.copy(response);
-            let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
-            promiseFriends.then((response) => {
-                this.currentFriends = angular.copy(response.data.friends);
-                for (var k = 0; k < this.currentFriends.length; k++)
-                {
-                    let promise = this.ContentQuery.getPostsPromise(this.currentFriends[k].id);
-                    promise.then((response) => {
-
-                        //this.cpts++;
-                        if (angular.copy(response.data.posts) !== null)
-                        {
-                            this.content.push(angular.copy(response.data.posts));
-                            this.associate();
-                            this.sortPosts();
-
-                        }
-
-                    });
-                    let promisePic = this.ContentQuery.getPicturesPromise(this.currentFriends[k].id);
-                    promisePic.then((response) => {
-                        //this.cpts++;
-                        if (angular.copy(response.data.pictures) !== null)
-                        {
-                            this.content.push(angular.copy(response.data.pictures));
-                            this.associate();
-                            this.sortPosts();
-                            this.toast.displayToasts();
-                        }
-                    });
-                }
-
-            });
+            this.checkOwnProfile();
+            this.getContent();
         });
 
     }
-    associate()
-    {
-        if (this.content !== null && this.content.length > 0)
-        {
-            var currentContent = this.content.pop();
-            for (var i in currentContent)
-            {
-                for (var j in this.currentFriends)
-                {
-                    if (this.currentFriends[j].id === currentContent[i].user_id)
-                    {
-                        this.data.push({
-                            user: this.currentFriends[j],
-                            content: currentContent[i]
-                        });
-                    }
-                }
-            }
-
-        }
-    }
-    commentsDialog(post)
-    {
+    commentsDialog(post) {
         let options = {
             controller: CommentsDisplayController,
             controllerAs: 'vm',
             locals:
                     {
-                        contentId: post.content.id,
+                        contentId: post.id,
                         user: this.user
                     }
         }
 
         this.Dialog.fromTemplate('commentsDisplay', options);
     }
-    sortPosts()
-    {
+
+    sortPosts() {
         this.data.sort(function (a, b) {
-            return Date.parse(b.content.date) - Date.parse(a.content.date);
+            return Date.parse(b.created_at) - Date.parse(a.created_at);
         });
     }
-    delay(post)
-    {
+
+    delay(post) {
         if (post === null || typeof post === 'undefined')
             return 0;
-        var diff = Date.now() - Date.parse(post.content.date);
+        var diff = Date.now() - Date.parse(post.created_at);
 
         var sec = parseInt(diff / 1000);
         var min = parseInt(sec / 60);
@@ -136,21 +94,62 @@ class PostDisplayProfileController {
             return "Il y a " + sec + " secondes.";
         return "À l'instant.";
     }
+
     isPicture(post) {
-        if (post.content.type === "picture")
+        if (post.type === "picture")
             return true;
         return false;
     }
-    
-    isText(post)
-    {
-        if (post.content.type === "post")
+
+    isText(post) {
+        if (post.type === "post")
             return true;
         return false;
     }
-    test()
-    {
-        console.log(this.data);
+
+    getContent() {
+        this.API.all('content/list').get('', {
+            id: this.user.id,
+            user_id: this.id_user
+        }).then((response) => {
+            this.data = angular.copy(response.data.contents);
+            this.sortPosts();
+        });
+    }
+
+    getCommentsFor(content_id) {
+        this.API.all('comments/list').get('', {
+            id: this.user.data.id,
+            content_id: content_id
+        }).then((response) => {
+            this.profileComments[content_id] = angular.copy(response.data.comments);
+        });
+    }
+
+    checkOwnProfile() {
+        if (this.user.id == this.id_user) {
+            this.ownProfile = true;
+        }
+    }
+
+    toogleCreate(target) {
+        switch (target) {
+            case 'post':
+                this.createPost = !this.createPost;
+                this.createEvent = false;
+                this.createFile = false;
+                break;
+            case 'event':
+                this.createPost = false;
+                this.createEvent = !this.createEvent;
+                this.createFile = false;
+                break;
+            case 'file':
+                this.createPost = false;
+                this.createEvent = false;
+                this.createFile = !this.createFile;
+                break;
+        }
     }
 }
 
