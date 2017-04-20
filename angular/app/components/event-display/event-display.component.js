@@ -1,4 +1,4 @@
-class EventDisplayController{
+class EventDisplayController {
     constructor(DialogService, API, CurrentUserService, FriendsQueryService, ContentQueryService) {
         'ngInject';
         this.Dialog = DialogService;
@@ -7,11 +7,11 @@ class EventDisplayController{
         this.FriendsQuery = FriendsQueryService;
         this.ContentQuery = ContentQueryService;
         this.user = null;
-        this.currentFriends = null;
+        this.currentFriends = [];
         this.done = false;
         this.friendsLoaded = false;
-        this.content=[];
-        this.data=[];
+        this.content = [];
+        this.data = [];
     }
 
     $onInit()
@@ -19,26 +19,40 @@ class EventDisplayController{
         let promiseUser = this.CurrentUser.getUserPromise();
         promiseUser.then((response) => {
             this.user = angular.copy(response);
-            let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
-            promiseFriends.then((response) => {
-                this.currentFriends = angular.copy(response.data.friends);
-                for (var k = 0; k < this.currentFriends.length; k++)
+            this.currentFriends.push(this.user);
+            let promiseA = this.ContentQuery.getEventsPromise(this.user.id);
+            promiseA.then((response) => {
+
+                if (angular.copy(response.data.events) !== null)
                 {
-                    let promise = this.ContentQuery.getEventsPromise(this.currentFriends[k].id);
-                    promise.then((response) => {
+                    this.content.push(angular.copy(response.data.events));
+                    this.associate();
+                    this.sortPosts();
 
-                        if (angular.copy(response.data.events) !== null)
-                        {
-                            this.content.push(angular.copy(response.data.events));
-                            this.associate();
-                            this.sortPosts();
-
-                        }
-
-                    });
                 }
+                let promiseFriends = this.FriendsQuery.getFriendsPromise(this.user.id);
+                promiseFriends.then((response) => {
+                    this.currentFriends = angular.copy(response.data.friends);
+                    for (var k = 0; k < this.currentFriends.length; k++)
+                    {
+                        let promise = this.ContentQuery.getEventsPromise(this.currentFriends[k].id);
+                        promise.then((response) => {
+
+                            if (angular.copy(response.data.events) !== null)
+                            {
+                                this.content.push(angular.copy(response.data.events));
+                                this.associate();
+                                this.sortPosts();
+
+                            }
+
+                        });
+                    }
+
+                });
 
             });
+
         });
     }
     associate()

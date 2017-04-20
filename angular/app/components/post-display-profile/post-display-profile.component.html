@@ -4,7 +4,7 @@
     <div layout="column" class="post-content">
         <div ng-if="vm.ownProfile">
             <div layout="row" >
-                <md-button class="md-icon-button" aria-label="Nouveau post" ng-click="vm.toogleCreate('post')">
+                <md-button class="md-icon-button" aria-label="Nouveau post" ng-click="vm.createPostDialog()">
                     <md-icon class="material-icons">create</md-icon>
                     <md-tooltip md-direction="top">Nouveau post</md-tooltip>
                 </md-button>
@@ -19,10 +19,6 @@
                 <md-button class="md-icon-button" aria-label="Editer le profil" ng-click="vm.editProfilDialog()">
                     <md-icon class="material-icons">create</md-icon>
                     <md-tooltip md-direction="top">Editer le profil</md-tooltip>
-                </md-button>
-                <md-button class="md-icon-button" aria-label="Créer du contenu" ng-click="vm.createContentDialog()">
-                    <md-icon class="material-icons">create</md-icon>
-                    <md-tooltip md-direction="top">Créer du contenu</md-tooltip>
                 </md-button>
             </div>
             <div ng-if="vm.createPost">
