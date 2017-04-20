@@ -1,0 +1,49 @@
+<md-dialog style="max-height: 90vh; min-width: 80vh; max-width: 90vh;">
+    <form ng-submit="vm.save()">
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Créer un événement</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content layout="row" layout-align="center">
+            <md-content layout="column" layout-align="none" style="overflow: visible;">
+                <md-input-container style="width: 100%">
+                    <label>Nom du l'événement</label>
+                    <input ng-model="vm.event.text">
+                </md-input-container>
+                <div class="md-block" style="position: relative;">
+                    <label>Date de l'événement</label>
+                    <md-datepicker ng-model="vm.event.date" ></md-datepicker>
+                </div>
+                <div layout="row" layout-align="center center" class="md-block" style="position: relative;">
+                    <p>Heure : </p>
+                    <md-input-container>
+                        
+                        <md-select ng-model="vm.event.hour">
+                            <md-option ng-repeat="hour in vm.hours" value="{{hour}}">
+                                {{hour}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    :
+                    <md-input-container>
+                        
+                        <md-select ng-model="vm.event.minute">
+                            <md-option ng-repeat="min in vm.minutes" value="{{min}}">
+                                {{min}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </md-content>
+
+        </md-dialog-content>
+
+        <md-dialog-actions>
+            <md-button type="button" ng-click="vm.cancel()">ANNULER</md-button>
+            <md-button class="md-primary md-raised" type="submit">ENREGISTRER</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

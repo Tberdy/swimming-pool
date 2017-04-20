@@ -50,4 +50,12 @@ export class ContentQueryService {
             text:text
         })
     }
+    addEventPromise(userId,text,date)
+    {
+        return this.API.all('content/add/event').post('', {
+            user_id: userId,
+            text:text,
+            date:date
+        })
+    }
 }

@@ -1,6 +1,6 @@
 import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
 import {ProfileEditController} from '../../../dialogs/profile-edit/profile-edit.dialog.js';
-import {CreateContentController} from '../../../dialogs/create-content/create-content.dialog.js';
+import {CreateEventController} from '../../../dialogs/create-event/create-event.dialog.js';
 
 class PostDisplayProfileController {
     constructor($stateParams, DialogService, API, CurrentUserService, ToastService) {
@@ -37,6 +37,7 @@ class PostDisplayProfileController {
             this.checkOwnProfile();
             this.getContent();
         });
+        this.toast.displayToasts();
 
     }
     editProfilDialog() {
@@ -51,10 +52,11 @@ class PostDisplayProfileController {
 
         this.Dialog.fromTemplate('profile-edit', options);
     }
-    createContentDialog()
+    createEventDialog()
     {
+        console.log("test");
         let options = {
-            controller: CreateContentController,
+            controller: CreateEventController,
             controllerAs: 'vm',
             locals:
                     {
@@ -62,7 +64,7 @@ class PostDisplayProfileController {
                     }
         }
 
-        this.Dialog.fromTemplate('create-content', options);
+        this.Dialog.fromTemplate('create-event', options);
     }
     commentsDialog(post)
     {

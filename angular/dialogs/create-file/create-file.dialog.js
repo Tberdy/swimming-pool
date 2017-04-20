@@ -1,7 +1,8 @@
-export class CreateContentController{
+export class CreateFileController{
     constructor(DialogService,user){
         'ngInject';
         this.user=user;
+        
         this.DialogService = DialogService;
     }
 
