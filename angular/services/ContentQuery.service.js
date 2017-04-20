@@ -29,4 +29,19 @@ export class ContentQueryService {
             user_id: userId
         })
     }
+    getCommentsPromise(userId,contentId)
+    {
+        return this.API.all('comments/list').get('', {
+            id: userId,
+            content_id:contentId
+        })
+    }
+    addCommentPromise(userId,contentId,text)
+    {
+        return this.API.all('comments/add').post('', {
+            id: userId,
+            content_id:contentId,
+            text:text
+        })
+    }
 }

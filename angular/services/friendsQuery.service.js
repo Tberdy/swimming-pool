@@ -3,7 +3,7 @@ export class FriendsQueryService {
         'ngInject';
 
         this.API = API;
-        this.waitingToasts=[];
+        
 
     }
     /*
@@ -26,10 +26,7 @@ export class FriendsQueryService {
      }
      }
      */
-    addToast(content)
-    {
-        this.waitingToasts.push(content);
-    }
+    
     getInvitationsPromise(userId)
     {
         return this.API.all('user/friends/invitations/list').get('', {

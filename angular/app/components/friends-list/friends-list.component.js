@@ -25,15 +25,9 @@ class FriendsListController {
                 this.currentFriends = angular.copy(response.data.friends);
             });
         });
-        this.displayToasts();
+        this.toast.displayToasts();
     }
-    displayToasts(){
-        while(this.FriendsQuery.waitingToasts.length>0)
-        {
-            var a=this.FriendsQuery.waitingToasts.shift();
-            this.toast.show(a);
-        }
-    }
+    
     checkNoFriends()
     {
         if(this.currentFriends===null) return true;

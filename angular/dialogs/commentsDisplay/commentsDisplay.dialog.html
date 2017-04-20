@@ -21,28 +21,11 @@
                         <p>{{comment.content.text}}</p>
                     </md-card-content>
                 </md-card>
-                <md-card id="template">
-                    <md-card-header>
-                        <md-card-avatar>
-                            <img class="md-avatar-icon" ng-src="img/example/mark.jpg">
-                        </md-card-avatar>
-                        <md-card-header-text>
-                            <span class="md-title">Mark Zuckerberg</span>
-                            <span class="md-subhead">Il y a 1 heure.</span>
-                        </md-card-header-text>
-                    </md-card-header>
-                    <md-card-content>
-                        <p>Mdr lol c tro b1 votr site.</p>
-                    </md-card-content>
-                </md-card>
             </div>
             <md-input-container class="md-block" style="margin-left: 1em;margin-right: 1em;">
                 <label>Écrire un commentaire.</label>
                 <textarea ng-model="vm.newComment" rows="5" md-select-on-focus style="min-height: 40em;padding-bottom: 0;"></textarea>
-                <div ng-messages="vm.isEmpty()">
-                    <div ng-message="empty">Votre commentaire est vide !</div>
-                    <div ng-message="unempty">Exprimez vous !</div>
-                </div>
+                    <p>{{vm.message}}<p>
             </md-input-container>
         </md-dialog-content>
 

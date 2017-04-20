@@ -1,7 +1,7 @@
 import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
 
 class PostDisplayController {
-    constructor(DialogService, API, CurrentUserService, FriendsQueryService, ContentQueryService) {
+    constructor(DialogService, API, CurrentUserService, FriendsQueryService, ContentQueryService,ToastService) {
         'ngInject';
         this.Dialog = DialogService;
         this.API = API;
@@ -11,6 +11,7 @@ class PostDisplayController {
         this.user = null;
         this.currentFriends = null;
         this.done = false;
+        this.toast=ToastService;
         //var cpts = 0;
         this.data=[];
         this.content = [];
@@ -46,12 +47,14 @@ class PostDisplayController {
                             this.content.push(angular.copy(response.data.pictures));
                             this.associate();
                             this.sortPosts();
+                            this.toast.displayToasts();
                         }
                     });
                 }
 
             });
         });
+        
     }
     associate()
     {
@@ -81,7 +84,8 @@ class PostDisplayController {
             controllerAs: 'vm',
             locals:
                     {
-                        contentId: post.content.id
+                        contentId: post.content.id,
+                        user: this.user
                     }
         }
         
