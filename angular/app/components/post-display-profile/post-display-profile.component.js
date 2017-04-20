@@ -11,6 +11,7 @@ class PostDisplayProfileController {
         this.user = null;
         this.toast = ToastService;
         this.data = [];
+        this.nbComment = {};
 
         this.ownProfile = false;
         this.createPost = false;
@@ -113,16 +114,19 @@ class PostDisplayProfileController {
             user_id: this.id_user
         }).then((response) => {
             this.data = angular.copy(response.data.contents);
+            angular.forEach(this.data, function (value, key) {
+                this.countComments(value.id, key);
+            }.bind(this));
             this.sortPosts();
         });
-    }
+    }    
 
-    getCommentsFor(content_id) {
-        this.API.all('comments/list').get('', {
-            id: this.user.data.id,
+    countComments(content_id, key) {
+        this.API.all('comments/count').get('', {
+            id: this.user.id,
             content_id: content_id
         }).then((response) => {
-            this.profileComments[content_id] = angular.copy(response.data.comments);
+            this.data[key].count = angular.copy(response.data.count);
         });
     }
 
