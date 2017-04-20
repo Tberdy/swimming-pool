@@ -19,11 +19,9 @@ export class CreateEventController{
     }
     parseDate()
     {
-        console.log(this.event.date.toDateString());
         this.event.date.setHours(parseInt(this.event.hour));
         this.event.date.setMinutes(parseInt(this.event.minute));
-        console.log(this.event.date.toISOString());
-        return this.event.date.toJSON();
+        return this.event.date.toString();
         
     }
     save(){
@@ -39,7 +37,7 @@ export class CreateEventController{
     }
 
     cancel(){
-        this.parseDate();
+        //this.parseDate();
         this.DialogService.cancel();
     }
 }

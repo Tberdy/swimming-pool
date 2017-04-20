@@ -26,10 +26,11 @@ class PostDisplayController {
                 id: this.user.id
             }).then((response) => {
                 this.data = angular.copy(response.data.contents);
+                this.sortPosts();
                 angular.forEach(this.data, function (value, key) {
                     this.countComments(value.id, key);
                 }.bind(this));
-                this.sortPosts();
+                
             });
         });
 
