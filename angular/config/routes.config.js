@@ -33,7 +33,8 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
                     'main@': {
                         templateUrl: getView('landing')
                     }
-                }
+                },
+                redirectTo: 'app.news'
             })
             .state('app.login', {
                 url: '/login',

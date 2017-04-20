@@ -1,30 +1,19 @@
 class AppHeaderController {
-    constructor($sce, API, $auth, CurrentUserService) {
+    constructor($sce, API, $auth, CurrentUserService, $state, $localStorage) {
         'ngInject';
 
         this.$sce = $sce;
         this.API = API;
         this.$auth = $auth;
         this.user = CurrentUserService;
+        this.$state = $state;
+        this.$localStorage = $localStorage;
     }
-    /*
-    $onInit(){
-        this.user = {};
-        if(this.isAuth()) this.getUser();
+    
+    logout() {
+        this.$auth.logout();
+        this.$state.go('app.login');
     }
-
-    isAuth() {
-        return this.$auth.isAuthenticated();
-    }
-
-    getUser() {
-        this.API.all('user').get('')
-                .then((response) => {
-                    this.user = angular.copy(response);
-                    console.log(response);
-                });
-    }
-    */
 }
 
 export const AppHeaderComponent = {
