@@ -26,6 +26,25 @@ class ContentController extends Controller {
                 'neutral' => $value->reactions()->where('type', '=', 'neutral')->count(),
                 'fire' => $value->reactions()->where('type', '=', 'fire')->count()
             );
+
+            $userReaction = $value->reactions()->where('user_id', '=', $request->id)->get();
+
+            $tmp = array(
+                'like' => false,
+                'love' => false,
+                'dislike' => false,
+                'happy' => false,
+                'neutral' => false,
+                'fire' => false
+            );
+            if (isset($userReaction[0])) {
+                $tmp[$userReaction[0]->type] = true;
+                $contents[$key]->style = array(
+                    $userReaction[0]->type => 'md-primary'
+                );
+            }
+
+            $contents[$key]->userReaction = $tmp;
         }
         return response()->success(compact('contents'));
     }
@@ -57,6 +76,26 @@ class ContentController extends Controller {
                     'neutral' => $value->reactions()->where('type', '=', 'neutral')->count(),
                     'fire' => $value->reactions()->where('type', '=', 'fire')->count()
                 );
+
+                $userReaction = $value->reactions()->where('user_id', '=', $request->id)->get();
+
+                $tmp = array(
+                    'like' => false,
+                    'love' => false,
+                    'dislike' => false,
+                    'happy' => false,
+                    'neutral' => false,
+                    'fire' => false
+                );
+                if (isset($userReaction[0])) {
+                    $tmp[$userReaction[0]->type] = true;
+                    $value->style = array(
+                        $userReaction[0]->type => 'md-primary'
+                    );
+                }
+
+                $value->userReaction = $tmp;
+
                 $value->user = $friend;
                 $contents[] = $value;
             }
