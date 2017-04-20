@@ -1,3 +1,4 @@
+import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
 import {ProfileEditController} from '../../../dialogs/profile-edit/profile-edit.dialog.js';
 import {CreateEventController} from '../../../dialogs/create-event/create-event.dialog.js';
 
@@ -65,7 +66,20 @@ class PostDisplayProfileController {
 
         this.Dialog.fromTemplate('create-event', options);
     }
+    commentsDialog(post)
+    {
+        let options = {
+            controller: CommentsDisplayController,
+            controllerAs: 'vm',
+            locals:
+                    {
+                        contentId: post.id,
+                        user: this.user
+                    }
+        }
 
+        this.Dialog.fromTemplate('commentsDisplay', options);
+    }
     sortPosts() {
         this.data.sort(function (a, b) {
             return Date.parse(b.created_at) - Date.parse(a.created_at);
@@ -169,6 +183,48 @@ class PostDisplayProfileController {
                 this.createFile = !this.createFile;
                 break;
         }
+    }
+    
+    react(type, key, post) {
+        this.API.all('reactions/add').post('', {
+            id: this.user.id,
+            content_id: post.id,
+            type: type
+        }).then((response) => {
+            this.data[key].style = {};
+            this.data[key].style[type] = 'md-primary';
+            this.changeUserReaction(type, key);
+        });
+    }
+    
+    changeUserReaction(type, key) {
+        if (this.data[key].userReaction['like']) {
+            this.data[key].userReaction['like'] = false;
+            this.data[key].reactions['like']--;
+        } 
+        if (this.data[key].userReaction['love']) {
+            this.data[key].userReaction['love'] = false;
+            this.data[key].reactions['love']--;
+        }
+        if (this.data[key].userReaction['dislike']) {
+            this.data[key].userReaction['dislike'] = false;
+            this.data[key].reactions['dislike']--;
+        }
+        if (this.data[key].userReaction['happy']) {
+            this.data[key].userReaction['happy'] = false;
+            this.data[key].reactions['happy']--;
+        }
+        if (this.data[key].userReaction['neutral']) {
+            this.data[key].userReaction['neutral'] = false;
+            this.data[key].reactions['neutral']--;
+        }
+        if (this.data[key].userReaction['fire']) {
+            this.data[key].userReaction['fire'] = false;
+            this.data[key].reactions['fire']--;
+        }
+        this.data[key].userReaction[type] = true;
+        this.data[key].reactions[type]++; 
+        
     }
 }
 

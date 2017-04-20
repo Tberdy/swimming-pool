@@ -41,7 +41,7 @@
                 <ng-dropzone class="dropzone" options="vm.dzOptions" callbacks="vm.dzCallbacks" methods="vm.dzMethods"></ng-dropzone>
             </div>
         </div>
-        <md-card ng-repeat="post in vm.data">
+        <md-card ng-repeat="(key, post) in vm.data">
             <md-card-header>
                 <md-card-avatar>
                     <img class="md-avatar-icon" ng-src="{{vm.user.img}}">
@@ -57,31 +57,29 @@
                 <p>{{post.text}}</p>
             </md-card-content>
             <md-card-actions class="button-content" layout="row" layout-align="center center">
-
                 <div layout="column"  layout-align="center center">
-                    <p>11</p>
-                    <md-button><i class="material-icons">thumb_up</i></md-button>
+                    <p>{{vm.data[key].reactions['like']}}</p>
+                    <md-button ng-click="vm.react('like', key, post)" ng-class="vm.data[key].style['like']"><i class="material-icons">thumb_up</i></md-button>
                 </div>
                 <div layout="column"  layout-align="center center">
-                    <p>13</p>
-                    <md-button><i class="material-icons">favorite</i></md-button>
+                    <p>{{vm.data[key].reactions['love']}}</p>
+                    <md-button ng-click="vm.react('love', key, post)" ng-class="vm.data[key].style['love']"><i class="material-icons">favorite</i></md-button>
                 </div>
                 <div layout="column"  layout-align="center center">
-                    <p>3</p>
-                    <md-button><i class="material-icons">thumb_down</i></md-button>
+                    <p>{{vm.data[key].reactions['dislike']}}</p>
+                    <md-button ng-click="vm.react('dislike', key, post)" ng-class="vm.data[key].style['dislike']"><i class="material-icons">thumb_down</i></md-button>
                 </div>
                 <div layout="column"  layout-align="center center">
-                    <p>{{post.nb_thumbsup}}</p>
-                    <md-button><i class="material-icons">insert_emoticon</i></md-button>
-                </div>
-
-                <div layout="column"  layout-align="center center">
-                    <p>{{post.nb_thumbsup}}</p>
-                    <md-button><i class="material-icons">sentiment_neutral</i></md-button>
+                    <p>{{vm.data[key].reactions['happy']}}</p>
+                    <md-button ng-click="vm.react('happy', key, post)" ng-class="vm.data[key].style['happy']"><i class="material-icons">insert_emoticon</i></md-button>
                 </div>
                 <div layout="column"  layout-align="center center">
-                    <p>{{post.nb_thumbsup}}</p>
-                    <md-button><i class="material-icons">whatshot</i></md-button>
+                    <p>{{vm.data[key].reactions['neutral']}}</p>
+                    <md-button ng-click="vm.react('neutral', key, post)" ng-class="vm.data[key].style['neutral']"><i class="material-icons">sentiment_neutral</i></md-button>
+                </div>
+                <div layout="column"  layout-align="center center">
+                    <p>{{vm.data[key].reactions['fire']}}</p>
+                    <md-button ng-click="vm.react('fire', key, post)" ng-class="vm.data[key].style['fire']"><i class="material-icons">whatshot</i></md-button>
                 </div>
             </md-card-actions>
             <md-button class="button-comments" ng-click="vm.commentsDialog(post)"> {{post.count}} commentaire(s) -  Afficher les commentaires</md-button>
