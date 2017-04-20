@@ -60,5 +60,5 @@ Route::get('reaction/get', 'ReactionController@get');
 Route::get('reactions/list', 'ReactionController@listPerContent');
 Route::get('reactions/list/byuser', 'ReactionController@listPerUser');
 Route::post('reactions/add', 'ReactionController@add');
-Route::post('reactions/add', 'ReactionController@update');
+Route::post('reactions/update', 'ReactionController@update');
 Route::post('reactions/delete', 'ReactionController@delete');
