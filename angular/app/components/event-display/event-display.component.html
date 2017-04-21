@@ -1,7 +1,7 @@
 <md-subheader class="md-no-sticky subheader">Mes événements</md-subheader>
 <md-content>
     <div layout="column" class="event-content"> <!--ng-if="vm.isDone()"!-->
-        <md-card ng-repeat="event in vm.data">
+        <md-card ng-repeat="(key, event) in vm.data">
             <md-card-header>
                 <md-card-avatar>
                     <img class="md-avatar-icon" ng-src="{{event.user.img}}">
@@ -17,6 +17,8 @@
             </md-card-content>
             <md-card-actions layout="row" layout-align="start center">
             </md-card-actions>
+            <md-button class="button-comments" ng-click="vm.commentsDialog(event)">Afficher les commentaires </md-button>
         </md-card>
+        
     </div>
 </md-content>

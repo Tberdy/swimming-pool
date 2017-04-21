@@ -2,12 +2,13 @@ import {FriendSelectionController} from '../../../dialogs/friendSelection/friend
 import {FriendsDeleteConfirmController} from '../../../dialogs/friendsDeleteConfirm/friendsDeleteConfirm.dialog.js';
 
 class FriendsListController {
-    constructor(DialogService, API, CurrentUserService,FriendsQueryService,ToastService) {
+    constructor(DialogService, API, CurrentUserService,FriendsQueryService,ToastService,$state) {
         'ngInject';
         this.Dialog = DialogService;
         this.API = API;
         this.CurrentUser = CurrentUserService;
         this.FriendsQuery= FriendsQueryService;
+        this.$state=$state;
         this.message="";
         this.emptyQuery=true;
         this.user=null;
@@ -27,7 +28,10 @@ class FriendsListController {
         });
         this.toast.displayToasts();
     }
-    
+    goToProfil(friend)
+    {
+        this.$state.go('app.profile', {id_user: friend.id});
+    }
     checkNoFriends()
     {
         if(this.currentFriends===null) return true;
@@ -100,10 +104,6 @@ class FriendsListController {
         }
         this.Dialog.fromTemplate('friendSelection', options);
         //alert(a);
-    }
-    goToProfil(person,event)
-    {
-        //dialog of mini profil
     }
 }
 

@@ -1,5 +1,5 @@
 export class FriendSelectionController {
-    constructor(DialogService, API, FriendsQueryService, CurrentUserService, parent,$state) {
+    constructor(DialogService, API, FriendsQueryService, CurrentUserService, parent, $state) {
         'ngInject';
         this.Dialog = DialogService;
         this.FriendsQuery = FriendsQueryService;
@@ -13,7 +13,7 @@ export class FriendSelectionController {
         this.parent = parent;
         this.message = "";
         this.isDisabled = false;
-        this.$state=$state;
+        this.$state = $state;
         this.$onInit();
     }
     $onInit() {
@@ -34,6 +34,17 @@ export class FriendSelectionController {
                 this.friends = angular.copy(response.data.friens);
             });
         });
+    }
+    goToProfil()
+    {
+        this.message = "";
+        if (this.selectedItem === null)
+        {
+            this.message = "L\'utilisateur n\'éxiste pas";
+            return;
+        }
+        this.Dialog.hide();
+        this.$state.go('app.profile', {id_user: this.selectedItem.id});
     }
     save() {
         this.message = "";
@@ -63,12 +74,12 @@ export class FriendSelectionController {
         }
         let promiseAdd = this.FriendsQuery.addFriendsPromise(this.user.id, this.selectedItem.id)
         promiseAdd.then((response) => {
-            this.FriendsQuery.addToast("Invitation envoyée !");
+            this.toast.addToast("Invitation envoyée !");
             this.$state.reload();
             this.Dialog.hide();
         });
-        
-        
+
+
     }
 
     cancel() {

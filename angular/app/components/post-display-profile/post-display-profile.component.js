@@ -1,6 +1,7 @@
 import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
 import {ProfileEditController} from '../../../dialogs/profile-edit/profile-edit.dialog.js';
 import {CreateEventController} from '../../../dialogs/create-event/create-event.dialog.js';
+import {CreatePostController} from '../../../dialogs/create-post/create-post.dialog.js';
 import {CreateFileController} from '../../../dialogs/create-file/create-file.dialog.js';
 
 class PostDisplayProfileController {
@@ -58,6 +59,19 @@ class PostDisplayProfileController {
         };
 
         this.Dialog.fromTemplate('profile-edit', options);
+    }
+    createPostDialog()
+    {
+        let options = {
+            controller: CreatePostController,
+            controllerAs: 'vm',
+            locals:
+                    {
+                        user: this.user
+                    }
+        }
+
+        this.Dialog.fromTemplate('create-post', options);
     }
     createEventDialog()
     {

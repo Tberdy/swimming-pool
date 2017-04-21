@@ -77,8 +77,7 @@ class PostDisplayController {
     {
         if (post === null || typeof post === 'undefined')
             return 0;
-        var diff = Date.now() - Date.parse(post.updated_at);
-
+        var diff = Date.now() - Date.parse(post.created_at);
         var sec = parseInt(diff / 1000);
         var min = parseInt(sec / 60);
         var hour = parseInt(min / 60);
