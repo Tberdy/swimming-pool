@@ -34,7 +34,6 @@ class FriendsInvitationController {
     {
         let promise = this.FriendsQuery.refuseFriendsPromise(this.user.id, friendId)
         promise.then((response) => {
-            //refresh
             this.FriendsQuery.addToast("Invitation refusée.");
             this.$state.reload();
         });

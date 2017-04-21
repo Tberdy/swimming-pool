@@ -1,5 +1,5 @@
 export class FriendSelectionController {
-    constructor(DialogService, API, FriendsQueryService, CurrentUserService, parent, $state) {
+    constructor(DialogService, API, FriendsQueryService, CurrentUserService, parent, $state,ToastService) {
         'ngInject';
         this.Dialog = DialogService;
         this.FriendsQuery = FriendsQueryService;
@@ -10,6 +10,7 @@ export class FriendSelectionController {
         this.user = null;
         this.friendsInvitation = null;
         this.friends = null;
+        this.toast=ToastService;
         this.parent = parent;
         this.message = "";
         this.isDisabled = false;
