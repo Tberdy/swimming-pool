@@ -2,17 +2,15 @@
     <md-subheader class="md-no-sticky subheader">Mes amis</md-subheader>
     <md-list-item >
         <table layout="column" layout-align=" stretch" style="width:100%" onload="vm.checkFriends();">
-            <tr layout="row"  layout-align="space-around center" ng-repeat="person in vm.currentFriends" class = "friends-box" ng-click="vm.goToProfil(person, $event)">
+            <tr layout="row"  layout-align="space-between center" ng-repeat="person in vm.currentFriends" class = "friends-box" ng-click="vm.goToProfil(person, $event)">
                 <th layout="row">
                     <img alt="{{person.firstname}} {{person.name}}" ng-src="{{ person.img}}" class="md-avatar">
-                    <div class="box-message">{{person.firstname}} {{person.name}}</div>
+                    <div ng-if="vm.goToProfil(person)" class="box-message">{{person.firstname}} {{person.name}}</div>
                 </th>
-                <th><i class="material-icons" ng-click="doSecondaryAction($event)">message</i></th>
                 <th class="friends-checkbox" style="float:left;">
                     <md-checkbox  ng-model="person.selected"></md-checkbox>
                 </th>
             </tr>
-
         </table>
     </md-list-item>
     <div class="box-message" ng-if="vm.checkNoFriends()">

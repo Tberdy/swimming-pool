@@ -1,3 +1,5 @@
+import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
+
 class EventDisplayController {
     constructor(DialogService, API, CurrentUserService, FriendsQueryService, ContentQueryService) {
         'ngInject';
@@ -81,6 +83,20 @@ class EventDisplayController {
         this.data.sort(function (a, b) {
             return Date.parse(b.content.date) - Date.parse(a.content.date);
         });
+    }
+    commentsDialog(post)
+    {
+        let options = {
+            controller: CommentsDisplayController,
+            controllerAs: 'vm',
+            locals:
+                    {
+                        contentId: post.id,
+                        user: this.user
+                    }
+        }
+
+        this.Dialog.fromTemplate('commentsDisplay', options);
     }
     test()
     {

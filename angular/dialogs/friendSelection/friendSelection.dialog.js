@@ -35,6 +35,10 @@ export class FriendSelectionController {
             });
         });
     }
+    goToProfil(friend)
+    {
+        this.$state.go('app.profile', {id_user: friend.id});
+    }
     save() {
         this.message = "";
         //Valid select item
