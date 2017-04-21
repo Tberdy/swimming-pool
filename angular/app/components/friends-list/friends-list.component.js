@@ -105,10 +105,6 @@ class FriendsListController {
         this.Dialog.fromTemplate('friendSelection', options);
         //alert(a);
     }
-    goToProfil(person,event)
-    {
-        //dialog of mini profil
-    }
 }
 
 export const FriendsListComponent = {

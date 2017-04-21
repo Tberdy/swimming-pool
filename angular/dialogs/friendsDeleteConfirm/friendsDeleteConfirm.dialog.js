@@ -1,11 +1,12 @@
 export class FriendsDeleteConfirmController {
-    constructor(DialogService, FriendsQueryService, CurrentUserService, parent, selectedTab,$state) {
+    constructor(DialogService, FriendsQueryService, CurrentUserService, parent, selectedTab,$state,ToastService) {
         'ngInject';
 
         this.DialogService = DialogService;
         this.FriendsQuery = FriendsQueryService;
         this.CurrentUser = CurrentUserService;
         this.data = parent;
+        this.toast=ToastService;
         this.selectedTab = selectedTab;
         this.user = null;
         this.$state=$state;
@@ -27,7 +28,7 @@ export class FriendsDeleteConfirmController {
            this.FriendsQuery.deleteFriend(this.selectedTab[k].id, this.user.id);
 
         }
-        this.FriendsQuery.addToast("Vous avez supprimé " + this.selectedTab.length + " ami(s).");
+        this.toast.addToast("Vous avez supprimé " + this.selectedTab.length + " ami(s).");
         this.$state.reload();
         this.DialogService.hide();
         
