@@ -123,5 +123,16 @@ export function RoutesConfig($stateProvider, $urlRouterProvider) {
                         templateUrl: getView('chat')
                     }
                 }
+            })
+            .state('app.photos', {
+                url: '/photos',
+                data: {
+                    auth: true
+                },
+                views: {
+                    'main@': {
+                        templateUrl: getView('photos')
+                    }
+                }
             });
 }

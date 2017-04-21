@@ -1,0 +1,8 @@
+<md-subheader class="md-no-sticky subheader">Mes photos</md-subheader>
+<md-content>
+    <div layout="column" class="post-content"> <!--ng-if="vm.isDone()"!-->
+        <md-card ng-repeat="(key, post) in vm.data">
+            <img ng-if="vm.isPicture(post)" ng-src="{{post.file}}" class="md-card-image">
+        </md-card>
+    </div>
+</md-content>
