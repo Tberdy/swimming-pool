@@ -74,7 +74,7 @@ export class FriendSelectionController {
         }
         let promiseAdd = this.FriendsQuery.addFriendsPromise(this.user.id, this.selectedItem.id)
         promiseAdd.then((response) => {
-            this.FriendsQuery.addToast("Invitation envoyée !");
+            this.toast.addToast("Invitation envoyée !");
             this.$state.reload();
             this.Dialog.hide();
         });
