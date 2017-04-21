@@ -12,17 +12,13 @@
                     <md-icon class="material-icons">event</md-icon>
                     <md-tooltip md-direction="top">Nouvel événement</md-tooltip>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Nouvelle photo" ng-click="vm.toogleCreate('file')">
+                <md-button class="md-icon-button" aria-label="Nouvelle photo" ng-click="vm.createFileDialog()">
                     <md-icon class="material-icons">image</md-icon>
                     <md-tooltip md-direction="top">Nouvelle photo</md-tooltip>
                 </md-button>
                 <md-button class="md-icon-button" aria-label="Editer le profil" ng-click="vm.editProfilDialog()">
                     <md-icon class="material-icons">create</md-icon>
                     <md-tooltip md-direction="top">Editer le profil</md-tooltip>
-                </md-button>
-                <md-button class="md-icon-button" aria-label="Créer du contenu" ng-click="vm.createContentDialog()">
-                    <md-icon class="material-icons">create</md-icon>
-                    <md-tooltip md-direction="top">Créer du contenu</md-tooltip>
                 </md-button>
             </div>
             <div ng-if="vm.createPost">
@@ -44,16 +40,22 @@
         <md-card ng-repeat="(key, post) in vm.data">
             <md-card-header>
                 <md-card-avatar>
-                    <img class="md-avatar-icon" ng-src="{{vm.user.img}}">
+                    <img class="md-avatar-icon" ng-src="{{vm.userProfile.img}}">
                 </md-card-avatar>
                 <md-card-header-text>
-                    <span class="md-title">{{vm.user.firstname}} {{vm.user.name}}</span>
+                    <span class="md-title">{{vm.userProfile.firstname}} {{vm.userProfile.name}}</span>
                     <span class="md-subhead">{{vm.delay(post)}}</span>
                 </md-card-header-text>
             </md-card-header>
             <img ng-if="vm.isPicture(post)" ng-src="{{post.file}}" class="md-card-image">
-
+            <md-card-content ng-if="vm.isFile(post)">
+                <a ng-href="{{post.file}}" target="_blank">{{post.text}}</a>
+            </md-card-content>
             <md-card-content ng-if="vm.isText(post)">
+                <p>{{post.text}}</p>
+            </md-card-content>
+            <md-card-content ng-if="vm.isEvent(post)">
+                <h2>{{post.date}}</h2>
                 <p>{{post.text}}</p>
             </md-card-content>
             <md-card-actions class="button-content" layout="row" layout-align="center center">

@@ -31,6 +31,7 @@ Route::get('/user', function (Request $request) {
 Route::get('user/get', 'UserController@get');
 Route::get('user/list', 'UserController@getList');
 Route::post('user/update', 'UserController@update');
+Route::post('user/update/img', 'UserController@updateImg');
 Route::post('user/delete', 'UserController@delete');
 
 Route::get('user/friends/list', 'UserController@listFriends');

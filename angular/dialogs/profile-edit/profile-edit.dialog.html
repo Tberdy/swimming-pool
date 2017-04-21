@@ -10,7 +10,7 @@
         <md-dialog-content layout="row" layout-align="center">
             <div class="md-block" style="margin-right: 3em;margin-top: 1em;">
                 <label>Photo de profil</label>
-                <div></div>
+                <div><ng-dropzone class="dropzone" options="vm.dzOptions" callbacks="vm.dzCallbacks" methods="vm.dzMethods"></ng-dropzone></div>
             </div>
             <md-content layout="column" layout-align="center start" style="overflow: visible;">
                 <md-input-container style="width: 100%">

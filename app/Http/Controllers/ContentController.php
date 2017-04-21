@@ -151,9 +151,17 @@ class ContentController extends Controller {
         $path = 'storage' . DIRECTORY_SEPARATOR . $id;
         $file->move($path, $filename);
 
+        $type = 'file';
+        if ($extension === 'jpg' || $extension === 'jpeg' || $extension === 'png' || $extension === 'bmp' || $extension === 'tiff' || $extension === 'gif') {
+            $type = 'picture';
+        }
+        if ($extension === 'mpeg' || $extension === 'avi' || $extension === 'mp4') {
+            $type = 'video';
+        }
+        
         $content = new Content;
         $content->user_id = $id;
-        $content->type = 'file';
+        $content->type = $type;
         $content->text = $originalFilename;
         $content->file = $path . DIRECTORY_SEPARATOR . $filename;
         $content->save();

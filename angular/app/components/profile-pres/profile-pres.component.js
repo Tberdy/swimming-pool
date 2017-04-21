@@ -41,7 +41,6 @@ class ProfilePresController {
             user_id: this.id_user
         }).then((response) => {
             this.profile = angular.copy(response.data.user);
-            this.profile.ppLink = this.profile.ppLink || 'img/default-user.png';
             
             this.dzOptions.params.id = this.user.data.id;
             

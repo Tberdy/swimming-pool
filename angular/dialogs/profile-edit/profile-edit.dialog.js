@@ -3,21 +3,23 @@ export class ProfileEditController{
         'ngInject';
         this.user=user;
         this.DialogService = DialogService;
+        this.API = API;
         this.genders=["Homme","Femme"];
         
         this.dzOptions = {
-            url: '/api/content/add/file',
+            url: '/api/user/update/img',
             params: {
-                id: null
+                id: user.id
             },
             maxFilesize: '10',
             addRemoveLinks: false,
-            maxFiles: 1
+            maxFiles: 1,
+            acceptedFiles: 'image/*'
         };
     }
 
     save(){
-        //Logic here
+        
         this.DialogService.hide();
     }
 

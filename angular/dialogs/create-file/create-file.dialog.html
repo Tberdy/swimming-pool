@@ -3,16 +3,13 @@
 
         <md-toolbar>
           <div class="md-toolbar-tools">
-            <h2>Create-file</h2>
+            <h2>Ajoutez un fichier</h2>
           </div>
         </md-toolbar>
 
         <md-dialog-content>
             <div class="md-dialog-content">
-                <md-input-container flex>
-                    <label>Data</label>
-                    <input type="text">
-                </md-input-container>
+                <ng-dropzone class="dropzone" options="vm.dzOptions" callbacks="vm.dzCallbacks" methods="vm.dzMethods"></ng-dropzone>
              </div>
         </md-dialog-content>
 

@@ -39,6 +39,23 @@ class UserController extends Controller {
 
         return response()->success(array());
     }
+    
+    public function updateImg(Request $request) {
+        $id = $request->id;
+
+        $file = $request->file('file');
+        $extension = $file->getClientOriginalExtension();
+        $originalFilename = $file->getClientOriginalName();
+        $filename = uniqid($id . '-') . '.' . $extension;
+        $path = 'storage' . DIRECTORY_SEPARATOR . $id;
+        $file->move($path, $filename);
+
+        $user = User::find($request->id);
+        $user->img = ($path . DIRECTORY_SEPARATOR . $filename);
+        $user->save();
+
+        return response()->success(array());
+    }
 
     public function delete(Request $request) {
         User::destroy($request->id);

@@ -1,6 +1,7 @@
 import {CommentsDisplayController} from '../../../dialogs/commentsDisplay/commentsDisplay.dialog.js';
 import {ProfileEditController} from '../../../dialogs/profile-edit/profile-edit.dialog.js';
 import {CreateEventController} from '../../../dialogs/create-event/create-event.dialog.js';
+import {CreateFileController} from '../../../dialogs/create-file/create-file.dialog.js';
 
 class PostDisplayProfileController {
     constructor($stateParams, DialogService, API, CurrentUserService, ToastService) {
@@ -14,6 +15,7 @@ class PostDisplayProfileController {
         this.toast = ToastService;
         this.data = [];
         this.nbComment = {};
+        this.userProfile = {};
 
         this.ownProfile = false;
         this.createPost = false;
@@ -37,6 +39,11 @@ class PostDisplayProfileController {
             this.checkOwnProfile();
             this.getContent();
         });
+        this.API.all('user/get').get('', {
+            user_id: this.id_user
+        }).then((response) => {
+            this.userProfile = angular.copy(response.data.user);
+        });
         this.toast.displayToasts();
 
     }
@@ -48,13 +55,12 @@ class PostDisplayProfileController {
                     {
                         user: this.user
                     }
-        }
+        };
 
         this.Dialog.fromTemplate('profile-edit', options);
     }
     createEventDialog()
     {
-        console.log("test");
         let options = {
             controller: CreateEventController,
             controllerAs: 'vm',
@@ -62,9 +68,22 @@ class PostDisplayProfileController {
                     {
                         user: this.user
                     }
-        }
+        };
 
         this.Dialog.fromTemplate('create-event', options);
+    }
+    createFileDialog()
+    {
+        let options = {
+            controller: CreateFileController,
+            controllerAs: 'vm',
+            locals:
+                    {
+                        user: this.user
+                    }
+        };
+
+        this.Dialog.fromTemplate('create-file', options);
     }
     commentsDialog(post)
     {
@@ -76,7 +95,7 @@ class PostDisplayProfileController {
                         contentId: post.id,
                         user: this.user
                     }
-        }
+        };
 
         this.Dialog.fromTemplate('commentsDisplay', options);
     }
@@ -124,17 +143,25 @@ class PostDisplayProfileController {
             return "Il y a " + sec + " secondes.";
         return "À l'instant.";
     }
+    
+    isEvent(post) {
+        return (post.type === "event");
+    }
 
     isPicture(post) {
-        if (post.type === "picture")
-            return true;
-        return false;
+        return (post.type === "picture");
+    }
+    
+    isVideo(post) {
+        return (post.type === "video");
+    }
+    
+    isFile(post) {
+        return (post.type === "file");
     }
 
     isText(post) {
-        if (post.type === "post")
-            return true;
-        return false;
+        return (post.type === "post");
     }
 
     getContent() {
