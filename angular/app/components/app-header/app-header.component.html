@@ -12,6 +12,7 @@
                 <div>
                     <a hide-xs class="AppHeader-link md-subhead" ng-if="vm.user.isAuth()" ui-sref="app.profile({ id_user: vm.user.data.id })">{{vm.user.data.firstname}} {{vm.user.data.name}}</a>
                     <a hide-xs class="AppHeader-link md-subhead" ng-if="!vm.user.isAuth()" ui-sref="app.login">Login</a>
+                    <a hide-xs class="AppHeader-link md-subhead" ng-if="!vm.user.isAuth()" ui-sref="app.register">Register</a>
                     <a hide-xs class="AppHeader-link md-subhead" ng-if="vm.user.isAuth()" ng-click="vm.logout()">Logout</a>
                 </div>
             </div>
