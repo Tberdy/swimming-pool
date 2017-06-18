@@ -3,8 +3,9 @@
     <md-list-item >
         <table layout="column" layout-align=" none">
             <tr layout="row" layout-align=" stretch" ng-repeat="person in vm.friendsInvitation" class = "friends-box" ng-click="">
+                <i class="material-icons delete-box">clear</i>
                 <th><img alt="{{person.firstname}} {{person.name}}" ng-src="{{person.img}}" class="md-avatar"></th>
-                <th>{{person.firstname}} {{person.name}}</th> 
+                <th>{{person.firstname}} {{person.name}}</th>
                 <!--<th><i class="material-icons friends-list-icon" ng-click="doSecondaryAction($event)">email</i></th>!-->
                 <th><md-button class="md-raised md-primary" ng-click="vm.addFriend(person.id)">Accepter</md-button></th>
             <th><md-button class="md-raised md-warn freveal-color-button" ng-click="vm.refuseFriend(person.id)">Refuser</md-button></th>

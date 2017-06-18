@@ -1,6 +1,9 @@
 <md-subheader class="md-no-sticky subheader">Mes photos</md-subheader>
 <md-content>
+    <div layout="row" layout-align="center center">
         <md-card class="post-content" ng-repeat="picture in vm.data">
+            <i class="material-icons delete-box">clear</i>
             <img ng-src="{{picture.file}}" class="md-card-image img">
         </md-card>
+    </div>
 </md-content>
