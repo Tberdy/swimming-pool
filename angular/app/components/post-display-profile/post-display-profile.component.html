@@ -38,7 +38,7 @@
             </div>
         </div>
         <md-card ng-repeat="(key, post) in vm.data">
-            <i class="material-icons delete-box">clear</i>
+            <md-button  ng-click="vm.delete(post)"class="delete-box"><i class="material-icons">clear</i></md-button>
             <md-card-header>
                 <md-card-avatar>
                     <img class="md-avatar-icon" ng-src="{{vm.userProfile.img}}">

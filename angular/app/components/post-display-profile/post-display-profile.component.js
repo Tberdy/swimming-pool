@@ -3,7 +3,7 @@ import {ProfileEditController} from '../../../dialogs/profile-edit/profile-edit.
 import {CreateEventController} from '../../../dialogs/create-event/create-event.dialog.js';
 import {CreatePostController} from '../../../dialogs/create-post/create-post.dialog.js';
 import {CreateFileController} from '../../../dialogs/create-file/create-file.dialog.js';
-
+import {DeletePostConfirmController} from '../../../dialogs/delete-post-confirm/delete-post-confirm.dialog.js';
 class PostDisplayProfileController {
     constructor($stateParams, DialogService, API, CurrentUserService, ToastService) {
         'ngInject';
@@ -47,6 +47,20 @@ class PostDisplayProfileController {
         });
         this.toast.displayToasts();
 
+    }
+    delete(post)
+    {
+        let options = {
+            controller: DeletePostConfirmController,
+            controllerAs: 'vm',
+            locals:
+                    {
+                        user: this.user,
+                        post : post
+                    }
+        };
+
+        this.Dialog.fromTemplate('delete-post-confirm', options);
     }
     editProfilDialog() {
         let options = {

@@ -1,0 +1,14 @@
+.post-content md-card
+{
+    position : relative;
+}
+.delete-box
+{
+    position : absolute;
+    margin-top: 0.5em;
+    min-height: 0 !important;
+    min-width: 0 !important;
+    line-height: 0 !important;
+    top : 0;
+    right : 0;
+}
